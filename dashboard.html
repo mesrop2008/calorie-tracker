@@ -22,7 +22,69 @@
 
     </header>
 
-    <div class="main-card">
+    <div class="diary-layout">
+
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <div class="sidebar-title">Ваши параметры</div>
+                <div class="sidebar-subtitle">Данные для расчёта нормы</div>
+
+                <div class="form-group">
+                    <label class="form-label">Вес</label>
+                    <input class="form-input" type="number" value="72">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Рост</label>
+                    <input class="form-input" type="number" value="175">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Возраст</label>
+                    <input class="form-input" type="number" value="22">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Пол</label>
+                    <div class="toggle-group">
+                        <button class="toggle-btn active">Мужской</button>
+                        <button class="toggle-btn">Женский</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Уровень активности</label>
+                    <div class="select-wrap">
+                        <select class="form-select">
+                            <option>Умеренная активность</option>
+                            <option>Сидячий образ жизни</option>
+                            <option>Лёгкая активность</option>
+                            <option>Высокая активность</option>
+                        </select>
+                        <span class="select-arrow">▼</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Цель</label>
+                    <div class="goal-toggle">
+                        <button class="goal-btn">Похудеть</button>
+                        <button class="goal-btn active">Удержать</button>
+                        <button class="goal-btn">Набрать</button>
+                    </div>
+                </div>
+
+                <button class="btn-green">Рассчитать норму калорий</button>
+
+                <div class="norm-box">
+                    <div class="norm-box-title">Ваша норма: 2 100 ккал/день</div>
+                    <div class="norm-box-sub">Цель: поддержание · Коэфф. активности: 1.55</div>
+                    <span class="norm-box-link">Изменить параметры</span>
+                </div>
+            </div>
+        </aside>
+
+        <div class="main-card">
 
         <div class="main-card-header">
             <div>
@@ -148,6 +210,96 @@
         </div>
 
         <a href="#" class="add-product-btn">+ Добавить продукт</a>
+
+        </div>
+
+        <aside class="right-sidebar">
+
+            <div class="streak-card">
+                <div class="streak-top">🔥 Серия</div>
+                <div class="streak-days">7 дней подряд</div>
+                <div class="streak-sub">Отличный результат!</div>
+            </div>
+
+            <div class="side-card">
+                <div class="side-card-title">Калории за неделю</div>
+                <div class="week-chart">
+                    <div class="week-col">
+                        <span class="week-val">1722</span>
+                        <div class="week-bar" style="height: 78px;"></div>
+                    </div>
+                    <div class="week-col">
+                        <span class="week-val">1980</span>
+                        <div class="week-bar" style="height: 90px;"></div>
+                    </div>
+                    <div class="week-col">
+                        <span class="week-val">1533</span>
+                        <div class="week-bar" style="height: 70px;"></div>
+                    </div>
+                    <div class="week-col">
+                        <span class="week-val">1848</span>
+                        <div class="week-bar" style="height: 84px;"></div>
+                    </div>
+                    <div class="week-col">
+                        <span class="week-val">1385</span>
+                        <div class="week-bar" style="height: 63px;"></div>
+                    </div>
+                    <div class="week-col">
+                        <span class="week-val">1449</span>
+                        <div class="week-bar" style="height: 66px;"></div>
+                    </div>
+                    <div class="week-col">
+                        <span class="week-val">1450</span>
+                        <div class="week-bar today" style="height: 66px;"></div>
+                    </div>
+                </div>
+                <div class="week-days">
+                    <span>Пн</span>
+                    <span>Вт</span>
+                    <span>Ср</span>
+                    <span>Чт</span>
+                    <span>Пт</span>
+                    <span>Сб</span>
+                    <span>Вс</span>
+                </div>
+            </div>
+
+            <div class="side-card">
+                <div class="side-card-title">Топ продуктов</div>
+                <div class="top-row">
+                    <span class="top-emoji">🍗</span>
+                    <span class="top-name">Куриная грудка</span>
+                    <span class="top-count">38 раз</span>
+                    <span class="top-rank">#1</span>
+                </div>
+                <div class="top-row">
+                    <span class="top-emoji">🥣</span>
+                    <span class="top-name">Овсяная каша</span>
+                    <span class="top-count">31 раз</span>
+                    <span class="top-rank">#2</span>
+                </div>
+                <div class="top-row">
+                    <span class="top-emoji">🌾</span>
+                    <span class="top-name">Гречневая каша</span>
+                    <span class="top-count">28 раз</span>
+                    <span class="top-rank">#3</span>
+                </div>
+                <div class="top-row">
+                    <span class="top-emoji">🧀</span>
+                    <span class="top-name">Творог</span>
+                    <span class="top-count">24 раза</span>
+                    <span class="top-rank">#4</span>
+                </div>
+            </div>
+
+            <div class="summary-card">
+                <div class="summary-title">📊 Итог недели</div>
+                <div class="summary-line">Ср. калории: <b>1 840 ккал/день</b></div>
+                <div class="summary-line">Норма выполнена: <b>5 из 7 дней ✓</b></div>
+                <div class="summary-deficit">Дефицит недели: −1 820 ккал</div>
+            </div>
+
+        </aside>
 
     </div>
     <nav class="mobile-nav">
