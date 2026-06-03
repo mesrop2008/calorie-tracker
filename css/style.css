@@ -659,3 +659,187 @@ body {
 .add-product-btn:hover {
     background: #256642;
 }
+
+.diary-layout {
+    display: grid;
+    grid-template-columns: 240px 1fr 270px;
+    gap: 20px;
+    padding: 20px 24px;
+    max-width: 1400px;
+    margin: 0 auto;
+    align-items: start;
+}
+
+.diary-layout .main-card {
+    margin: 0;
+    max-width: none;
+}
+
+.right-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    position: sticky;
+    top: 76px;
+}
+
+.streak-card {
+    background: #1B3A2D;
+    border-radius: 12px;
+    padding: 18px 20px;
+    color: #fff;
+}
+
+.streak-top {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 8px;
+}
+
+.streak-days {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.streak-sub {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.side-card {
+    background: #fff;
+    border: 1px solid #E0E0E0;
+    border-radius: 12px;
+    padding: 16px 18px;
+}
+
+.side-card-title {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+.week-chart {
+    display: flex;
+    align-items: flex-end;
+    gap: 6px;
+    height: 110px;
+}
+
+.week-col {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.week-val {
+    font-size: 9px;
+    color: #888;
+    margin-bottom: 3px;
+}
+
+.week-bar {
+    width: 100%;
+    background: #4CAF7D;
+    border-radius: 4px 4px 0 0;
+}
+
+.week-bar.today {
+    background: #1B3A2D;
+}
+
+.week-days {
+    display: flex;
+    gap: 6px;
+    margin-top: 6px;
+}
+
+.week-days span {
+    flex: 1;
+    text-align: center;
+    font-size: 11px;
+    color: #888;
+}
+
+.top-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 0;
+    border-bottom: 1px solid #F0F0F0;
+}
+
+.top-row:last-child {
+    border-bottom: none;
+}
+
+.top-emoji {
+    font-size: 18px;
+    width: 22px;
+    text-align: center;
+}
+
+.top-name {
+    flex: 1;
+    font-size: 13px;
+}
+
+.top-count {
+    font-size: 12px;
+    color: #888;
+}
+
+.top-rank {
+    font-size: 11px;
+    font-weight: 700;
+    color: #2E7D52;
+    background: #E8F5EE;
+    padding: 2px 7px;
+    border-radius: 6px;
+}
+
+.summary-card {
+    background: #1B3A2D;
+    border-radius: 12px;
+    padding: 16px 18px;
+    color: #fff;
+}
+
+.summary-title {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.summary-line {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 7px;
+}
+
+.summary-line b {
+    color: #fff;
+    font-weight: 600;
+}
+
+.summary-deficit {
+    font-size: 12px;
+    color: #FFA726;
+    margin-top: 4px;
+}
+
+@media (max-width: 768px) {
+    .diary-layout {
+        grid-template-columns: 1fr;
+        padding: 12px;
+        gap: 12px;
+    }
+
+    .right-sidebar {
+        position: static;
+    }
+}
