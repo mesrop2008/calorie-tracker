@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CalorieTracker — Дневник</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <header class="topnav">
+        <a href="index.html" class="nav-logo">
+            <span>🥗</span> CalorieTracker
+        </a>
+        <nav class="nav-links">
+            <a href="index.html" class="nav-link active">Главная</a>
+            <a href="dashboard.html" class="nav-link">Дневник</a>
+            <a href="#" class="nav-link">История</a>
+            <a href="#" class="nav-link">Настройки</a>
+        </nav>
+
+    </header>
+
+    <div class="main-card">
+
+        <div class="main-card-header">
+            <div>
+                <div class="main-card-title">Дневник питания</div>
+                <div class="main-card-date">Понедельник, 1 июня 2026</div>
+            </div>
+            <div class="day-nav">
+                <button class="day-nav-btn">◄</button>
+                <span class="day-nav-today">Сегодня</span>
+                <button class="day-nav-btn">►</button>
+            </div>
+        </div>
+
+        <div class="cal-summary">
+            <div class="cal-numbers">
+                <span class="cal-eaten">1 450</span>
+                <span class="cal-slash">/</span>
+                <span class="cal-norm">2 100</span>
+                <span class="cal-unit">ккал норма</span>
+                <span class="cal-remaining">Осталось: <span>650 ккал</span></span>
+            </div>
+            <div class="progress-wrap">
+                <div class="progress-bar" style="width: 69%;"></div>
+            </div>
+            <div class="progress-label">69% от нормы</div>
+            <div class="macros-row">
+                <div class="macro-item">
+                    <div class="macro-dot" style="background: #4CAF7D;"></div>
+                    <span class="macro-label">Белки</span>
+                    <span class="macro-val">68 / 158 г</span>
+                </div>
+                <div class="macro-item">
+                    <div class="macro-dot" style="background: #FFA726;"></div>
+                    <span class="macro-label">Жиры</span>
+                    <span class="macro-val">52 / 70 г</span>
+                </div>
+                <div class="macro-item">
+                    <div class="macro-dot" style="background: #42A5F5;"></div>
+                    <span class="macro-label">Углеводы</span>
+                    <span class="macro-val">187 / 263 г</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="meal-section">
+            <div class="meal-header">
+                <span class="meal-icon">🌅</span>
+                <span class="meal-name">Завтрак</span>
+                <span class="meal-kcal">390 ккал</span>
+            </div>
+            <div class="food-row">
+                <span class="food-emoji">🥣</span>
+                <div class="food-info">
+                    <div class="food-name">Овсяная каша с молоком</div>
+                    <div class="food-kcal-small">320 ккал</div>
+                </div>
+                <button class="food-delete">✕</button>
+            </div>
+            <div class="food-row">
+                <span class="food-emoji">🍎</span>
+                <div class="food-info">
+                    <div class="food-name">Яблоко</div>
+                    <div class="food-kcal-small">70 ккал</div>
+                </div>
+                <button class="food-delete">✕</button>
+            </div>
+        </div>
+
+        <div class="meal-section">
+            <div class="meal-header">
+                <span class="meal-icon">☀️</span>
+                <span class="meal-name">Обед</span>
+                <span class="meal-kcal">490 ккал</span>
+            </div>
+            <div class="food-row">
+                <span class="food-emoji">🍗</span>
+                <div class="food-info">
+                    <div class="food-name">Куриная грудка (200 г)</div>
+                    <div class="food-kcal-small">220 ккал</div>
+                </div>
+                <button class="food-delete">✕</button>
+            </div>
+            <div class="food-row">
+                <span class="food-emoji">🌾</span>
+                <div class="food-info">
+                    <div class="food-name">Гречневая каша</div>
+                    <div class="food-kcal-small">180 ккал</div>
+                </div>
+                <button class="food-delete">✕</button>
+            </div>
+            <div class="food-row">
+                <span class="food-emoji">🥗</span>
+                <div class="food-info">
+                    <div class="food-name">Салат овощной</div>
+                    <div class="food-kcal-small">90 ккал</div>
+                </div>
+                <button class="food-delete">✕</button>
+            </div>
+        </div>
+
+        <div class="meal-section">
+            <div class="meal-header">
+                <span class="meal-icon">🌙</span>
+                <span class="meal-name">Ужин</span>
+                <span class="meal-kcal">180 ккал</span>
+            </div>
+            <div class="food-row">
+                <span class="food-emoji">🧀</span>
+                <div class="food-info">
+                    <div class="food-name">Творог 5%</div>
+                    <div class="food-kcal-small">180 ккал</div>
+                </div>
+                <button class="food-delete">✕</button>
+            </div>
+        </div>
+
+        <div class="meal-section">
+            <div class="meal-header">
+                <span class="meal-icon">🍎</span>
+                <span class="meal-name">Перекус</span>
+                <span class="meal-kcal">0 ккал</span>
+            </div>
+        </div>
+
+        <a href="#" class="add-product-btn">+ Добавить продукт</a>
+
+    </div>
+    <nav class="mobile-nav">
+        <div class="mobile-nav-inner">
+            <a href="index.html" class="mob-btn active">
+                <span class="mob-btn-icon">🏠</span>
+                Главная
+            </a>
+            <a href="dashboard.html" class="mob-btn">
+                <span class="mob-btn-icon">📒</span>
+                Дневник
+            </a>
+            <a href="#" class="mob-btn">
+                <span class="mob-btn-icon">📅</span>
+                История
+            </a>
+            <a href="#" class="mob-btn">
+                <span class="mob-btn-icon">⚙️</span>
+                Настройки
+            </a>
+        </div>
+    </nav>
+
+</body>
+
+
+</html>

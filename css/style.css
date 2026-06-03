@@ -420,3 +420,242 @@ body {
         padding-bottom: 70px;
     }
 }
+
+.main-card {
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid #E0E0E0;
+    overflow: hidden;
+    max-width: 700px;
+    margin: 20px auto;
+}
+
+.main-card-header {
+    padding: 18px 20px 14px;
+    border-bottom: 1px solid #F0F0F0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.main-card-title {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.main-card-date {
+    font-size: 13px;
+    color: #888;
+    margin-top: 2px;
+}
+
+.day-nav {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.day-nav-btn {
+    background: none;
+    border: none;
+    color: #888;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.day-nav-today {
+    font-size: 13px;
+    color: #555;
+    padding: 4px 12px;
+    background: #F7F7F7;
+    border-radius: 20px;
+    border: 1px solid #E0E0E0;
+}
+
+.cal-summary {
+    padding: 18px 20px;
+    border-bottom: 1px solid #F0F0F0;
+}
+
+.cal-numbers {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+}
+
+.cal-eaten {
+    font-size: 36px;
+    font-weight: 700;
+}
+
+.cal-slash {
+    font-size: 22px;
+    color: #888;
+}
+
+.cal-norm {
+    font-size: 26px;
+    font-weight: 700;
+    color: #888;
+}
+
+.cal-unit {
+    font-size: 13px;
+    color: #888;
+    align-self: flex-end;
+    padding-bottom: 3px;
+}
+
+.cal-remaining {
+    margin-left: auto;
+    font-size: 12px;
+    color: #888;
+    align-self: flex-end;
+    padding-bottom: 4px;
+}
+
+.cal-remaining span {
+    color: #2E7D52;
+    font-weight: 600;
+}
+
+.progress-wrap {
+    height: 8px;
+    background: #F0F0F0;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 8px;
+}
+
+.progress-bar {
+    height: 100%;
+    border-radius: 4px;
+    background: #4CAF7D;
+}
+
+.progress-label {
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 10px;
+}
+
+.macros-row {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.macro-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+}
+
+.macro-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.macro-label {
+    color: #888;
+}
+
+.macro-val {
+    font-weight: 600;
+}
+
+.meal-section {
+    border-bottom: 1px solid #F0F0F0;
+}
+
+.meal-section:last-of-type {
+    border-bottom: none;
+}
+
+.meal-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    background: #F7F7F7;
+}
+
+.meal-icon {
+    font-size: 16px;
+}
+
+.meal-name {
+    font-size: 14px;
+    font-weight: 600;
+    flex: 1;
+}
+
+.meal-kcal {
+    font-size: 13px;
+    color: #888;
+}
+
+.food-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 20px;
+    border-bottom: 1px solid #F0F0F0;
+}
+
+.food-row:hover {
+    background: #F7F7F7;
+}
+
+.food-emoji {
+    font-size: 20px;
+    width: 28px;
+    text-align: center;
+}
+
+.food-info {
+    flex: 1;
+}
+
+.food-name {
+    font-size: 14px;
+}
+
+.food-kcal-small {
+    font-size: 12px;
+    color: #888;
+}
+
+.food-delete {
+    background: none;
+    border: none;
+    color: #888;
+    font-size: 14px;
+    cursor: pointer;
+    opacity: 0;
+}
+
+.food-row:hover .food-delete {
+    opacity: 1;
+}
+
+.add-product-btn {
+    display: block;
+    margin: 16px 20px;
+    padding: 12px;
+    background: #2E7D52;
+    color: #fff;
+    text-align: center;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.add-product-btn:hover {
+    background: #256642;
+}
