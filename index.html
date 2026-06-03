@@ -1,11 +1,167 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>CalorieTracker — Главная</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
-    
+
+    <header class="topnav">
+        <a href="index.html" class="nav-logo">
+            <span>🥗</span> CalorieTracker
+        </a>
+        <nav class="nav-links">
+            <a href="index.html" class="nav-link active">Главная</a>
+            <a href="#" class="nav-link">Дневник</a>
+            <a href="#" class="nav-link">История</a>
+            <a href="#" class="nav-link">Настройки</a>
+        </nav>
+        
+    </header>
+
+    <div class="page-layout-2col">
+
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <div class="sidebar-title">Ваши параметры</div>
+                <div class="sidebar-subtitle">Данные для расчёта нормы</div>
+
+                <div class="form-group">
+                    <label class="form-label">Вес</label>
+                    <input class="form-input" type="number" value="72">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Рост</label>
+                    <input class="form-input" type="number" value="175">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Возраст</label>
+                    <input class="form-input" type="number" value="22">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Пол</label>
+                    <div class="toggle-group">
+                        <button class="toggle-btn active">Мужской</button>
+                        <button class="toggle-btn">Женский</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Уровень активности</label>
+                    <div class="select-wrap">
+                        <select class="form-select">
+                            <option>Умеренная активность</option>
+                            <option>Сидячий образ жизни</option>
+                            <option>Лёгкая активность</option>
+                            <option>Высокая активность</option>
+                        </select>
+                        <span class="select-arrow">▼</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Цель</label>
+                    <div class="goal-toggle">
+                        <button class="goal-btn">Похудеть</button>
+                        <button class="goal-btn active">Удержать</button>
+                        <button class="goal-btn">Набрать</button>
+                    </div>
+                </div>
+
+                <button class="btn-green">Рассчитать норму калорий</button>
+
+                <div class="norm-box">
+                    <div class="norm-box-title">Ваша норма: 2 100 ккал/день</div>
+                    <div class="norm-box-sub">Цель: поддержание веса · Коэфф. активности: 1.55</div>
+                    <span class="norm-box-link">Изменить параметры</span>
+                </div>
+            </div>
+        </aside>
+
+        <main class="content-col">
+
+            <div class="hero">
+                <div class="hero-title">Привет! 👋</div>
+                <div class="hero-sub">
+                    Сегодня вы съели 1 450 ккал из 2 100. До нормы осталось 650 ккал. Продолжайте — вы на верном пути!
+                </div>
+                <a href="dashboard.html" class="hero-btn">Открыть дневник →</a>
+            </div>
+
+            <div>
+                <div class="section-heading">Сегодня</div>
+                <div class="today-snapshot">
+
+                    <div class="snap-card green">
+                        <div class="snap-card-title">Калории</div>
+                        <div class="snap-card-val">1 450</div>
+                        <div class="snap-card-sub">из 2 100 ккал</div>
+                        <div class="snap-progress">
+                            <div class="snap-progress-bar" style="width: 69%;"></div>
+                        </div>
+                    </div>
+
+                    <div class="snap-card">
+                        <div class="snap-card-title">Белки</div>
+                        <div class="snap-card-val">68 г</div>
+                        <div class="snap-card-sub">из 158 г</div>
+                        <div class="snap-progress">
+                            <div class="snap-progress-bar" style="width: 43%; background: #4CAF7D;"></div>
+                        </div>
+                    </div>
+
+                    <div class="snap-card">
+                        <div class="snap-card-title">Жиры</div>
+                        <div class="snap-card-val">52 г</div>
+                        <div class="snap-card-sub">из 70 г</div>
+                        <div class="snap-progress">
+                            <div class="snap-progress-bar" style="width: 74%; background: #FFA726;"></div>
+                        </div>
+                    </div>
+
+                    <div class="snap-card">
+                        <div class="snap-card-title">Углеводы</div>
+                        <div class="snap-card-val">187 г</div>
+                        <div class="snap-card-sub">из 263 г</div>
+                        <div class="snap-progress">
+                            <div class="snap-progress-bar" style="width: 71%; background: #42A5F5;"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <nav class="mobile-nav">
+        <div class="mobile-nav-inner">
+            <a href="index.html" class="mob-btn active">
+                <span class="mob-btn-icon">🏠</span>
+                Главная
+            </a>
+            <a href="#" class="mob-btn">
+                <span class="mob-btn-icon">📒</span>
+                Дневник
+            </a>
+            <a href="#" class="mob-btn">
+                <span class="mob-btn-icon">📅</span>
+                История
+            </a>
+            <a href="#" class="mob-btn">
+                <span class="mob-btn-icon">⚙️</span>
+                Настройки
+            </a>
+        </div>
+    </nav>
+
 </body>
+
 </html>
