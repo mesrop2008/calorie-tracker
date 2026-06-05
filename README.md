@@ -39,8 +39,10 @@ CalorieTracker — это лёгкий инструмент без лишних 
 
 Клонировать репозиторий и открыть home.html в браузере — никаких зависимостей и серверов не нужно.
 
+```bash
 git clone https://github.com/mesrop2008/calorie-tracker.git
 cd calorie-tracker
+```
 
 
 Затем открыть файл home.html в любом браузере.
