@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CalorieTracker — Настройки</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <header class="topnav">
+        <a href="home.html" class="nav-logo">
+            <span>🥗</span> CalorieTracker
+        </a>
+        <nav class="nav-links">
+            <a href="home.html" class="nav-link">Главная</a>
+            <a href="dashboard.html" class="nav-link">Дневник</a>
+            <a href="history.html" class="nav-link">История</a>
+            <a href="settings.html" class="nav-link active">Настройки</a>
+        </nav>
+    </header>
+
+    <div class="page-layout-2col">
+
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <div class="sidebar-title">Меню настроек</div>
+                <div class="settings-menu">
+                    <a href="#params" class="settings-menu-item active"><span>👤</span> Параметры тела</a>
+                    <a href="#goals" class="settings-menu-item"><span>🎯</span> Цели</a>
+                    <a href="#notifications" class="settings-menu-item"><span>🔔</span> Уведомления</a>
+                    <a href="#data" class="settings-menu-item"><span>💾</span> Данные</a>
+                    <a href="#display" class="settings-menu-item"><span>🎨</span> Отображение</a>
+                </div>
+            </div>
+
+            
+        </aside>
+
+        <main>
+            <div class="main-card">
+
+                <div id="params" class="settings-section">
+                    <div class="settings-section-title">👤 Параметры тела</div>
+                    <div class="params-grid">
+                        <div class="form-group">
+                            <label class="form-label">Вес, кг</label>
+                            <input class="form-input" type="number" value="72">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Рост, см</label>
+                            <input class="form-input" type="number" value="175">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Возраст, лет</label>
+                            <input class="form-input" type="number" value="22">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Пол</label>
+                            <div class="toggle-group">
+                                <button class="toggle-btn active">Мужской</button>
+                                <button class="toggle-btn">Женский</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Уровень активности</label>
+                        <div class="select-wrap">
+                            <select class="form-select">
+                                <option>Умеренная активность (3–5 тренировок в неделю)</option>
+                                <option>Сидячий образ жизни</option>
+                                <option>Лёгкая активность (1–3 тренировки)</option>
+                                <option>Высокая активность (6–7 тренировок)</option>
+                                <option>Очень высокая (физический труд)</option>
+                            </select>
+                            <span class="select-arrow">▼</span>
+                        </div>
+                    </div>
+                    <button class="btn-save">Сохранить параметры</button>
+                </div>
+
+                <div id="goals" class="settings-section">
+                    <div class="settings-section-title">🎯 Цели и нормы</div>
+                    <div class="form-group">
+                        <label class="form-label">Цель</label>
+                        <div class="goal-toggle">
+                            <button class="goal-btn">Похудеть</button>
+                            <button class="goal-btn active">Удержать вес</button>
+                            <button class="goal-btn">Набрать массу</button>
+                        </div>
+                    </div>
+                    <div class="settings-row">
+                        <span class="settings-row-label">Рассчитанная норма</span>
+                        <div class="settings-row-right">
+                            <span class="settings-row-val-green">2 100 ккал/день</span>
+                            <span class="settings-row-edit">Пересчитать</span>
+                        </div>
+                    </div>
+                    <div class="settings-row">
+                        <span class="settings-row-label">Коэффициент активности</span>
+                        <span class="settings-row-val">1.55 (умеренная)</span>
+                    </div>
+                    <div class="settings-row">
+                        <span class="settings-row-label">БОВ (базовый обмен веществ)</span>
+                        <span class="settings-row-val">1 808 ккал</span>
+                    </div>
+                </div>
+
+                <div id="notifications" class="settings-section">
+                    <div class="settings-section-title">🔔 Уведомления</div>
+                    <div class="settings-row">
+                        <span class="settings-row-label">Напоминания о еде</span>
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="switch-slider"></span>
+                        </label>
+                    </div>
+                    <div class="settings-row">
+                        <span class="settings-row-label">Итог дня вечером</span>
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="switch-slider"></span>
+                        </label>
+                    </div>
+                    <div class="settings-row">
+                        <span class="settings-row-label">Предупреждение о превышении нормы</span>
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="switch-slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div id="data" class="settings-section">
+                    <div class="settings-section-title">💾 Данные</div>
+                    <div class="settings-row">
+                        <span class="settings-row-label">Хранилище данных</span>
+                        <span class="settings-row-val">IndexedDB (браузер)</span>
+                    </div>
+                    <div class="settings-row">
+                        <span class="settings-row-label">Записей в базе</span>
+                        <span class="settings-row-val">142 продукта · 30 дней</span>
+                    </div>
+                    <div class="data-buttons">
+                        <button class="btn-green-outline">📥 Экспорт данных</button>
+                        <button class="btn-green-outline">📤 Импорт данных</button>
+                        <button class="btn-danger">🗑 Очистить историю</button>
+                    </div>
+                </div>
+
+                <div id="display" class="settings-section">
+                    <div class="settings-section-title">🎨 Отображение</div>
+                    <div class="settings-row">
+                        <span class="settings-row-label">Показывать БЖУ в дневнике</span>
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="switch-slider"></span>
+                        </label>
+                    </div>
+                    <div class="settings-row">
+                        <span class="settings-row-label">Разбивать по приёмам пищи</span>
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="switch-slider"></span>
+                        </label>
+                    </div>
+                    <div class="settings-row">
+                        <span class="settings-row-label">Тёмная тема</span>
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="switch-slider"></span>
+                        </label>
+                    </div>
+                    <div class="form-group" style="margin-top: 12px;">
+                        <label class="form-label">Единицы измерения</label>
+                        <div class="toggle-group" style="max-width: 200px;">
+                            <button class="toggle-btn active">кг / см</button>
+                            <button class="toggle-btn">lb / in</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <nav class="mobile-nav">
+        <div class="mobile-nav-inner">
+            <a href="home.html" class="mob-btn">
+                <span class="mob-btn-icon">🏠</span>
+                Главная
+            </a>
+            <a href="dashboard.html" class="mob-btn">
+                <span class="mob-btn-icon">📒</span>
+                Дневник
+            </a>
+            <a href="history.html" class="mob-btn">
+                <span class="mob-btn-icon">📅</span>
+                История
+            </a>
+            <a href="settings.html" class="mob-btn active">
+                <span class="mob-btn-icon">⚙️</span>
+                Настройки
+            </a>
+        </div>
+    </nav>
+
+</body>
+
+</html>
