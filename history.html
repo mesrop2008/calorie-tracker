@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CalorieTracker — История</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <header class="topnav">
+        <a href="index.html" class="nav-logo">
+            <span>🥗</span> CalorieTracker
+        </a>
+        <nav class="nav-links">
+            <a href="index.html" class="nav-link">Главная</a>
+            <a href="dashboard.html" class="nav-link">Дневник</a>
+            <a href="history.html" class="nav-link active">История</a>
+            <a href="settings.html" class="nav-link">Настройки</a>
+        </nav>
+        <div class="nav-user">
+            <div class="nav-user-dot">М</div>
+            User
+        </div>
+    </header>
+
+    <div class="page-layout-2col">
+
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <div class="sidebar-title">Фильтры</div>
+
+                <div class="form-group">
+                    <label class="form-label">Период</label>
+                    <div class="period-tabs">
+                        <button class="period-tab">Неделя</button>
+                        <button class="period-tab active">Месяц</button>
+                        <button class="period-tab">3 мес.</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">С</label>
+                    <input class="form-input" type="date" value="2026-05-01">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">По</label>
+                    <input class="form-input" type="date" value="2026-06-01">
+                </div>
+
+                <button class="btn-green">Применить</button>
+            </div>
+
+            <div class="sidebar-section">
+                <div class="sidebar-title">Итог периода</div>
+
+                <div class="summary-item">
+                    <div class="form-label">Ср. калории</div>
+                    <div class="summary-value">1 840 <span class="summary-small">ккал/день</span></div>
+                </div>
+
+                <div class="summary-item">
+                    <div class="form-label">Дней в норме</div>
+                    <div class="summary-value summary-value-green">18 <span class="summary-small">из 22</span></div>
+                </div>
+
+                <div class="summary-item">
+                    <div class="form-label">Изменение веса</div>
+                    <div class="summary-value summary-value-green">−0.8 кг</div>
+                </div>
+            </div>
+        </aside>
+
+        <main>
+            <div class="main-card">
+
+                <div class="main-card-header">
+                    <div class="main-card-title">История питания</div>
+                    <div class="main-card-date">Май — Июнь 2026</div>
+                </div>
+
+                <div class="history-stats">
+                    <div class="hstat">
+                        <div class="hstat-val">18</div>
+                        <div class="hstat-label">Дней в норме</div>
+                    </div>
+                    <div class="hstat">
+                        <div class="hstat-val">1 840</div>
+                        <div class="hstat-label">Ср. ккал/день</div>
+                    </div>
+                    <div class="hstat">
+                        <div class="hstat-val hstat-val-green">−0.8 кг</div>
+                        <div class="hstat-label">Изменение веса</div>
+                    </div>
+                    <div class="hstat">
+                        <div class="hstat-val">82%</div>
+                        <div class="hstat-label">Точность нормы</div>
+                    </div>
+                </div>
+
+                <div class="bar-chart-area">
+                    <div class="bar-chart-title">Калории за неделю</div>
+                    <div class="bar-chart">
+                        <div class="bar-col">
+                            <div class="bar-col-val">1722</div>
+                            <div class="bar-rect" style="height: 66px;"></div>
+                            <div class="bar-col-day">Пн</div>
+                        </div>
+                        <div class="bar-col">
+                            <div class="bar-col-val">2310</div>
+                            <div class="bar-rect over" style="height: 89px;"></div>
+                            <div class="bar-col-day">Вт</div>
+                        </div>
+                        <div class="bar-col">
+                            <div class="bar-col-val">1533</div>
+                            <div class="bar-rect" style="height: 59px;"></div>
+                            <div class="bar-col-day">Ср</div>
+                        </div>
+                        <div class="bar-col">
+                            <div class="bar-col-val">1848</div>
+                            <div class="bar-rect" style="height: 71px;"></div>
+                            <div class="bar-col-day">Чт</div>
+                        </div>
+                        <div class="bar-col">
+                            <div class="bar-col-val">2100</div>
+                            <div class="bar-rect exact" style="height: 81px;"></div>
+                            <div class="bar-col-day">Пт</div>
+                        </div>
+                        <div class="bar-col">
+                            <div class="bar-col-val">1385</div>
+                            <div class="bar-rect" style="height: 53px;"></div>
+                            <div class="bar-col-day">Сб</div>
+                        </div>
+                        <div class="bar-col">
+                            <div class="bar-col-val">1450</div>
+                            <div class="bar-rect today" style="height: 56px;"></div>
+                            <div class="bar-col-day">Вс</div>
+                        </div>
+                    </div>
+                    <div class="norm-indicator">── норма: 2 100 ккал</div>
+                </div>
+
+                <a href="dashboard.html" class="day-row">
+                    <div class="day-row-date">
+                        <div class="day-row-weekday">Вс</div>
+                        <div class="day-row-num">1</div>
+                        <div class="day-row-month">июн</div>
+                    </div>
+                    <div class="vdivider"></div>
+                    <div class="day-row-main">
+                        <div class="day-row-kcal">
+                            <span class="day-row-eaten">1 450</span>
+                            <span class="day-row-norm">из 2 100 ккал</span>
+                        </div>
+                        <div class="progress-wrap">
+                            <div class="progress-bar" style="width: 69%;"></div>
+                        </div>
+                        <div class="day-row-macros">
+                            <span class="day-row-macro">Б: <span>68 г</span></span>
+                            <span class="day-row-macro">Ж: <span>52 г</span></span>
+                            <span class="day-row-macro">У: <span>187 г</span></span>
+                        </div>
+                    </div>
+                    <span class="day-tag tag-yellow">В процессе</span>
+                </a>
+
+                <div class="day-row">
+                    <div class="day-row-date">
+                        <div class="day-row-weekday">Сб</div>
+                        <div class="day-row-num">31</div>
+                        <div class="day-row-month">май</div>
+                    </div>
+                    <div class="vdivider"></div>
+                    <div class="day-row-main">
+                        <div class="day-row-kcal">
+                            <span class="day-row-eaten">2 310</span>
+                            <span class="day-row-norm">из 2 100 ккал</span>
+                        </div>
+                        <div class="progress-wrap">
+                            <div class="progress-bar over" style="width: 100%;"></div>
+                        </div>
+                        <div class="day-row-macros">
+                            <span class="day-row-macro">Б: <span>142 г</span></span>
+                            <span class="day-row-macro">Ж: <span>89 г</span></span>
+                            <span class="day-row-macro">У: <span>280 г</span></span>
+                        </div>
+                    </div>
+                    <span class="day-tag tag-red">+210 ккал</span>
+                </div>
+
+                <div class="day-row">
+                    <div class="day-row-date">
+                        <div class="day-row-weekday">Пт</div>
+                        <div class="day-row-num">30</div>
+                        <div class="day-row-month">май</div>
+                    </div>
+                    <div class="vdivider"></div>
+                    <div class="day-row-main">
+                        <div class="day-row-kcal">
+                            <span class="day-row-eaten">2 100</span>
+                            <span class="day-row-norm">из 2 100 ккал</span>
+                        </div>
+                        <div class="progress-wrap">
+                            <div class="progress-bar" style="width: 100%; background: #2E7D52;"></div>
+                        </div>
+                        <div class="day-row-macros">
+                            <span class="day-row-macro">Б: <span>158 г</span></span>
+                            <span class="day-row-macro">Ж: <span>70 г</span></span>
+                            <span class="day-row-macro">У: <span>263 г</span></span>
+                        </div>
+                    </div>
+                    <span class="day-tag tag-green">В норме ✓</span>
+                </div>
+
+                <div class="day-row">
+                    <div class="day-row-date">
+                        <div class="day-row-weekday">Чт</div>
+                        <div class="day-row-num">29</div>
+                        <div class="day-row-month">май</div>
+                    </div>
+                    <div class="vdivider"></div>
+                    <div class="day-row-main">
+                        <div class="day-row-kcal">
+                            <span class="day-row-eaten">1 848</span>
+                            <span class="day-row-norm">из 2 100 ккал</span>
+                        </div>
+                        <div class="progress-wrap">
+                            <div class="progress-bar" style="width: 88%;"></div>
+                        </div>
+                        <div class="day-row-macros">
+                            <span class="day-row-macro">Б: <span>120 г</span></span>
+                            <span class="day-row-macro">Ж: <span>61 г</span></span>
+                            <span class="day-row-macro">У: <span>228 г</span></span>
+                        </div>
+                    </div>
+                    <span class="day-tag tag-green">В норме ✓</span>
+                </div>
+
+                <div class="day-row">
+                    <div class="day-row-date">
+                        <div class="day-row-weekday">Ср</div>
+                        <div class="day-row-num">28</div>
+                        <div class="day-row-month">май</div>
+                    </div>
+                    <div class="vdivider"></div>
+                    <div class="day-row-main">
+                        <div class="day-row-kcal">
+                            <span class="day-row-eaten">1 533</span>
+                            <span class="day-row-norm">из 2 100 ккал</span>
+                        </div>
+                        <div class="progress-wrap">
+                            <div class="progress-bar" style="width: 73%;"></div>
+                        </div>
+                        <div class="day-row-macros">
+                            <span class="day-row-macro">Б: <span>98 г</span></span>
+                            <span class="day-row-macro">Ж: <span>48 г</span></span>
+                            <span class="day-row-macro">У: <span>191 г</span></span>
+                        </div>
+                    </div>
+                    <span class="day-tag tag-yellow">−567 ккал</span>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <nav class="mobile-nav">
+        <div class="mobile-nav-inner">
+            <a href="index.html" class="mob-btn">
+                <span class="mob-btn-icon">🏠</span>
+                Главная
+            </a>
+            <a href="dashboard.html" class="mob-btn">
+                <span class="mob-btn-icon">📒</span>
+                Дневник
+            </a>
+            <a href="history.html" class="mob-btn active">
+                <span class="mob-btn-icon">📅</span>
+                История
+            </a>
+            <a href="settings.html" class="mob-btn">
+                <span class="mob-btn-icon">⚙️</span>
+                Настройки
+            </a>
+        </div>
+    </nav>
+
+</body>
+
+</html>
