@@ -32,35 +32,35 @@
 
                 <div class="form-group">
                     <label class="form-label">Вес</label>
-                    <input class="form-input" type="number" value="72">
+                    <input class="form-input" id="weight" type="number" value="72">
                 </div>
 
                 <div class="form-group">
                     <label class="form-label">Рост</label>
-                    <input class="form-input" type="number" value="175">
+                    <input class="form-input" id="height" type="number" value="175">
                 </div>
 
                 <div class="form-group">
                     <label class="form-label">Возраст</label>
-                    <input class="form-input" type="number" value="22">
+                    <input class="form-input" id="age" type="number" value="22">
                 </div>
 
                 <div class="form-group">
                     <label class="form-label">Пол</label>
-                    <div class="toggle-group">
-                        <button class="toggle-btn active">Мужской</button>
-                        <button class="toggle-btn">Женский</button>
+                    <div class="toggle-group" id="gender-group">
+                        <button class="toggle-btn active" data-gender="male">Мужской</button>
+                        <button class="toggle-btn" data-gender="female">Женский</button>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="form-label">Уровень активности</label>
                     <div class="select-wrap">
-                        <select class="form-select">
-                            <option>Умеренная активность</option>
-                            <option>Сидячий образ жизни</option>
-                            <option>Лёгкая активность</option>
-                            <option>Высокая активность</option>
+                        <select class="form-select" id="activity">
+                            <option value="moderate">Умеренная активность</option>
+                            <option value="sedentary">Сидячий образ жизни</option>
+                            <option value="light">Лёгкая активность</option>
+                            <option value="high">Высокая активность</option>
                         </select>
                         <span class="select-arrow">▼</span>
                     </div>
@@ -68,18 +68,18 @@
 
                 <div class="form-group">
                     <label class="form-label">Цель</label>
-                    <div class="goal-toggle">
-                        <button class="goal-btn">Похудеть</button>
-                        <button class="goal-btn active">Удержать</button>
-                        <button class="goal-btn">Набрать</button>
+                    <div class="goal-toggle" id="goal-group">
+                        <button class="goal-btn" data-goal="lose">Похудеть</button>
+                        <button class="goal-btn active" data-goal="keep">Удержать</button>
+                        <button class="goal-btn" data-goal="gain">Набрать</button>
                     </div>
                 </div>
 
-                <button class="btn-green">Рассчитать норму калорий</button>
+                <button class="btn-green" id="calc-btn">Рассчитать норму калорий</button>
 
                 <div class="norm-box">
-                    <div class="norm-box-title">Ваша норма: 2 100 ккал/день</div>
-                    <div class="norm-box-sub">Цель: поддержание веса · Коэфф. активности: 1.55</div>
+                    <div class="norm-box-title" id="norm-title">Ваша норма: 2 100 ккал/день</div>
+                    <div class="norm-box-sub" id="norm-sub">Цель: поддержание веса · Коэфф. активности: 1.55</div>
                     <span class="norm-box-link">Изменить параметры</span>
                 </div>
             </div>
@@ -101,8 +101,8 @@
 
                     <div class="snap-card green">
                         <div class="snap-card-title">Калории</div>
-                        <div class="snap-card-val">1 450</div>
-                        <div class="snap-card-sub">из 2 100 ккал</div>
+                        <div class="snap-card-val" id="snap-calories">1 450</div>
+                        <div class="snap-card-sub" id="snap-calories-sub">из 2 100 ккал</div>
                         <div class="snap-progress">
                             <div class="snap-progress-bar" style="width: 69%;"></div>
                         </div>
@@ -162,6 +162,7 @@
         </div>
     </nav>
 
+    <script src="js/script.js"></script>
 </body>
 
 </html>
