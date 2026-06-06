@@ -22,8 +22,6 @@ function getActivityFactor(activity) {
         factor = 1.55;
     } else if (activity === "high") {
         factor = 1.725;
-    } else if (activity === "veryhigh") {
-        factor = 1.9;
     }
 
     return factor;
@@ -44,39 +42,110 @@ function applyGoal(calories, goal) {
     return result;
 }
 
-function calcDailyNorm(weight, height, age, gender, activity, goal) {
-    let bmr = calcBMR(weight, height, age, gender);
 
-    let factor = getActivityFactor(activity);
-    let total = bmr * factor;
+let selectedGender = "male";
+let selectedGoal = "keep";
 
-    let result = applyGoal(total, goal);
 
-    return Math.round(result);
+let genderGroup = document.getElementById("gender-group");
+let genderButtons = genderGroup.querySelectorAll(".toggle-btn");
+
+genderButtons.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+        genderButtons.forEach(function (b) {
+            b.classList.remove("active");
+        });
+        btn.classList.add("active");
+        selectedGender = btn.dataset.gender;
+    });
+});
+
+
+let goalGroup = document.getElementById("goal-group");
+let goalButtons = goalGroup.querySelectorAll(".goal-btn");
+
+goalButtons.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+        goalButtons.forEach(function (b) {
+            b.classList.remove("active");
+        });
+        btn.classList.add("active");
+        selectedGoal = btn.dataset.goal;
+    });
+});
+
+
+function readForm() {
+    let weight = Number(document.getElementById("weight").value);
+    let height = Number(document.getElementById("height").value);
+    let age = Number(document.getElementById("age").value);
+    let activity = document.getElementById("activity").value;
+
+    let data = {
+        weight: weight,
+        height: height,
+        age: age,
+        gender: selectedGender,
+        activity: activity,
+        goal: selectedGoal
+    };
+
+    return data;
 }
 
 
-let norm1 = calcDailyNorm(72, 175, 22, "male", "moderate", "keep");
-console.log("Мужчина 72 кг, 175 см, 22 года, умеренная активность, удержать вес:");
-console.log("Норма: " + norm1 + " ккал/день");
-console.log("");
+function validate(data) {
+    if (data.weight < 30 || data.weight > 300) {
+        return "Введите корректный вес (30-300 кг)";
+    }
+
+    if (data.height < 100 || data.height > 250) {
+        return "Введите корректный рост (100-250 см)";
+    }
+
+    if (data.age < 10 || data.age > 120) {
+        return "Введите корректный возраст (10-120 лет)";
+    }
+
+    return null;
+}
 
 
-let norm2 = calcDailyNorm(60, 165, 25, "female", "light", "lose");
-console.log("Женщина 60 кг, 165 см, 25 лет, лёгкая активность, похудеть:");
-console.log("Норма: " + norm2 + " ккал/день");
-console.log("");
+function goalText(goal) {
+    if (goal === "lose") {
+        return "снижение веса";
+    } else if (goal === "gain") {
+        return "набор массы";
+    } else {
+        return "поддержание веса";
+    }
+}
 
 
-let norm3 = calcDailyNorm(80, 180, 30, "male", "high", "gain");
-console.log("Мужчина 80 кг, 180 см, 30 лет, высокая активность, набрать массу:");
-console.log("Норма: " + norm3 + " ккал/день");
-console.log("");
+function showResult(data) {
+    let bmr = calcBMR(data.weight, data.height, data.age, data.gender);
+    let factor = getActivityFactor(data.activity);
+    let total = bmr * factor;
+    let norm = Math.round(applyGoal(total, data.goal));
 
-console.log("=== Проверка БОВ ===");
+    document.getElementById("norm-title").textContent = "Ваша норма: " + norm + " ккал/день";
+    document.getElementById("norm-sub").textContent = "Цель: " + goalText(data.goal) + " · Коэфф. активности: " + factor;
 
-let bmrMale = calcBMR(72, 175, 22, "male");
-console.log("БОВ мужчины (72/175/22): " + bmrMale + " ккал");
+    document.getElementById("snap-calories").textContent = "1 450";
+    document.getElementById("snap-calories-sub").textContent = "из " + norm + " ккал";
+}
 
-let bmrFemale = calcBMR(60, 165, 25, "female");
-console.log("БОВ женщины (60/165/25): " + bmrFemale + " ккал");
+
+let calcButton = document.getElementById("calc-btn");
+
+calcButton.addEventListener("click", function () {
+    let data = readForm();
+    let error = validate(data);
+
+    if (error !== null) {
+        alert(error);
+        return;
+    }
+
+    showResult(data);
+});
