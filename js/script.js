@@ -128,7 +128,10 @@ function showResult(data) {
     let total = bmr * factor;
     let norm = Math.round(applyGoal(total, data.goal));
 
+    localStorage.setItem("dailyNorm", norm);
+
     document.getElementById("norm-title").textContent = "Ваша норма: " + norm + " ккал/день";
+    document.getElementById("norm-title-bar").textContent = norm;
     document.getElementById("norm-sub").textContent = "Цель: " + goalText(data.goal) + " · Коэфф. активности: " + factor;
 
     document.getElementById("snap-calories").textContent = "1 450";
