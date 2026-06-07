@@ -1,0 +1,138 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 500;
+}
+
+.modal {
+    background: #fff;
+    border-radius: 12px;
+    padding: 24px;
+    width: 100%;
+    max-width: 460px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.modal-title {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    font-size: 18px;
+    color: #888;
+    cursor: pointer;
+    padding: 4px 8px;
+}
+
+.modal-close:hover {
+    color: #1A1A1A;
+}
+
+.modal-error {
+    background: #FFEBEE;
+    color: #E53935;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 13px;
+    margin-bottom: 12px;
+}
+
+.modal-status {
+    font-size: 13px;
+    color: #888;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.modal-product-name {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: #1B3A2D;
+    padding: 10px 14px;
+    background: #E8F5EE;
+    border-radius: 8px;
+}
+
+.modal-preview {
+    background: #F7F7F7;
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin-bottom: 16px;
+}
+
+.preview-row {
+    font-size: 13px;
+    color: #555;
+    margin-bottom: 4px;
+}
+
+.preview-row:last-child {
+    margin-bottom: 0;
+}
+
+.preview-row span {
+    font-weight: 600;
+    color: #1A1A1A;
+}
+
+.modal-back-btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background: transparent;
+    border: 1px solid #E0E0E0;
+    border-radius: 8px;
+    font-size: 13px;
+    font-family: inherit;
+    color: #555;
+    cursor: pointer;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.modal-back-btn:hover {
+    background: #F7F7F7;
+}
+
+.result-item {
+    padding: 12px 14px;
+    border: 1px solid #E0E0E0;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    cursor: pointer;
+}
+
+.result-item:hover {
+    background: #E8F5EE;
+    border-color: #4CAF7D;
+}
+
+.result-name {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.result-info {
+    font-size: 12px;
+    color: #888;
+}
