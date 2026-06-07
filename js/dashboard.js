@@ -5,12 +5,16 @@ let diary = {
     snack: []
 };
 
+let savedNorm = localStorage.getItem("dailyNorm");
 let dailyNorm = 2100;
+
+if (savedNorm !== null) {
+    dailyNorm = Number(savedNorm);
+}
 
 let selectedFoodName = "";
 let selectedNutritionPer100 = null;
 let foundFoods = [];
-
 let russianQuery = "";
 
 
@@ -105,7 +109,6 @@ function showResults(foods) {
             "<div class='result-info'>" + food.food_description + "</div>";
 
         item.addEventListener("click", function () {
-            
             loadFoodDetails(food.food_id);
         });
 
@@ -280,6 +283,11 @@ function updateTotals() {
         }
     }
 
+    let freshNorm = localStorage.getItem("dailyNorm");
+    if (freshNorm !== null) {
+        dailyNorm = Number(freshNorm);
+    }
+
     let remaining = dailyNorm - totalCalories;
     let percent = Math.round((totalCalories / dailyNorm) * 100);
 
@@ -288,10 +296,25 @@ function updateTotals() {
     }
 
     document.getElementById("total-calories").textContent = totalCalories;
-    document.getElementById("remaining-calories").textContent = remaining;
     document.getElementById("calories-progress").style.width = percent + "%";
     document.getElementById("progress-label").textContent = percent + "% от нормы";
     document.getElementById("total-protein").textContent = Math.round(totalProtein * 10) / 10 + " г";
     document.getElementById("total-fat").textContent = Math.round(totalFat * 10) / 10 + " г";
     document.getElementById("total-carbs").textContent = Math.round(totalCarbs * 10) / 10 + " г";
+
+    let remainingEl = document.getElementById("cal-remaining-block");
+
+    if (totalCalories === 0) {
+        remainingEl.style.color = "#888";
+        remainingEl.textContent = "Осталось: " + dailyNorm + " ккал";
+    } else if (remaining > 0) {
+        remainingEl.style.color = "#2E7D52";
+        remainingEl.textContent = "Осталось: " + remaining + " ккал";
+    } else if (remaining === 0) {
+        remainingEl.style.color = "#2E7D52";
+        remainingEl.textContent = "✓ Норма выполнена!";
+    } else {
+        remainingEl.style.color = "#E53935";
+        remainingEl.textContent = "Превышение: +" + Math.abs(remaining) + " ккал";
+    }
 }
