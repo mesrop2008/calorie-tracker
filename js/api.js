@@ -224,7 +224,6 @@ function getNutritionPer100(food) {
         let firstServing = servings[0];
         let amount = parseFloat(firstServing.metric_serving_amount) || 100;
 
-        // FatSecret использует "carbohydrate" без s
         per100 = {
             calories: (parseFloat(firstServing.calories) / amount) * 100,
             protein: (parseFloat(firstServing.protein) / amount) * 100,

@@ -63,7 +63,6 @@ searchBtn.addEventListener("click", function () {
         return;
     }
 
-    // сохраняем русское название что ввёл пользователь
     russianQuery = query;
 
     document.getElementById("search-error").style.display = "none";
@@ -106,8 +105,7 @@ function showResults(foods) {
             "<div class='result-info'>" + food.food_description + "</div>";
 
         item.addEventListener("click", function () {
-            // передаём food_id для загрузки БЖУ
-            // но в дневнике покажем russianQuery — что ввёл пользователь
+            
             loadFoodDetails(food.food_id);
         });
 
