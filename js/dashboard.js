@@ -1,3 +1,56 @@
+
+let db = new Dexie("CalorieTrackerDB");
+
+db.version(1).stores({
+    diary: "date"
+});
+
+
+function getTodayDate() {
+    let today = new Date();
+    let year = today.getFullYear();
+    let month = String(today.getMonth() + 1).padStart(2, "0");
+    let day = String(today.getDate()).padStart(2, "0");
+    return year + "-" + month + "-" + day;
+}
+
+function saveDiary() {
+    let todayDate = getTodayDate();
+
+    let record = {
+        date: todayDate,
+        breakfast: diary.breakfast,
+        lunch: diary.lunch,
+        dinner: diary.dinner,
+        snack: diary.snack
+    };
+
+    db.diary.put(record).catch(function (error) {
+        console.log("Ошибка сохранения дневника:", error);
+    });
+}
+
+function loadDiary() {
+    let todayDate = getTodayDate();
+
+    return db.diary.get(todayDate)
+        .then(function (record) {
+            if (record) {
+                diary.breakfast = record.breakfast;
+                diary.lunch = record.lunch;
+                diary.dinner = record.dinner;
+                diary.snack = record.snack;
+
+                renderDiary();
+                updateTotals();
+            }
+        })
+        .catch(function (error) {
+            console.log("Ошибка загрузки дневника:", error);
+        });
+}
+
+
 let diary = {
     breakfast: [],
     lunch: [],
@@ -212,6 +265,8 @@ addFoodBtn.addEventListener("click", function () {
     renderDiary();
     updateTotals();
 
+    saveDiary();
+
     modalOverlay.style.display = "none";
 });
 
@@ -260,6 +315,8 @@ function renderMeal(mealKey, listId, kcalId) {
             diary[mealName].splice(index, 1);
             renderDiary();
             updateTotals();
+
+            saveDiary();
         });
     }
 }
@@ -318,3 +375,5 @@ function updateTotals() {
         remainingEl.textContent = "Превышение: +" + Math.abs(remaining) + " ккал";
     }
 }
+
+loadDiary();
