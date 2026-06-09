@@ -67,16 +67,33 @@ function formatDateRu(dateStr) {
     return weekdays[d.getDay()] + ", " + d.getDate() + " " + months[d.getMonth()] + " " + d.getFullYear();
 }
 
-
 let diary = { breakfast: [], lunch: [], dinner: [], snack: [] };
 
 function saveDiary() {
+    let cal = 0, prot = 0, fat = 0, carbs = 0;
+    ["breakfast", "lunch", "dinner", "snack"].forEach(function(meal) {
+        diary[meal].forEach(function(e) {
+            cal   += e.calories;
+            prot  += e.protein;
+            fat   += e.fat;
+            carbs += e.carbohydrates;
+        });
+    });
+
+    let normReached = (dailyNorm > 0) && (cal >= dailyNorm * 0.95);
+
     db.diary.put({
-        date: getTodayDate(),
-        breakfast: diary.breakfast,
-        lunch:     diary.lunch,
-        dinner:    diary.dinner,
-        snack:     diary.snack
+        date:          getTodayDate(),
+        breakfast:     diary.breakfast,
+        lunch:         diary.lunch,
+        dinner:        diary.dinner,
+        snack:         diary.snack,
+        totalCalories: Math.round(cal),
+        totalProtein:  Math.round(prot  * 10) / 10,
+        totalFat:      Math.round(fat   * 10) / 10,
+        totalCarbs:    Math.round(carbs * 10) / 10,
+        normCalories:  dailyNorm,
+        normReached:   normReached
     }).catch(function(e) { console.log("Ошибка сохранения:", e); });
 }
 
@@ -99,13 +116,90 @@ function setText(id, text) {
     if (el) el.textContent = text;
 }
 
-let selectedFoodName       = "";
-let selectedNutritionPer100 = null;
-let foundFoods             = [];
-let russianQuery           = "";
+function openEditModal(mealKey, index) {
+    let entry = diary[mealKey][index];
+    if (!entry) return;
 
-let openModalBtn = document.getElementById("open-modal-btn");
-let modalOverlay = document.getElementById("modal-overlay");
+    let existing = document.getElementById("edit-modal-overlay");
+    if (existing) existing.remove();
+
+    let overlay = document.createElement("div");
+    overlay.className = "edit-modal-overlay";
+    overlay.id = "edit-modal-overlay";
+
+    overlay.innerHTML =
+        "<div class='edit-modal'>" +
+            "<div class='edit-modal-title'>" + entry.name + "</div>" +
+            "<div class='edit-modal-sub'>Изменить количество граммов</div>" +
+            "<div class='form-group' style='margin-bottom:12px'>" +
+                "<label class='form-label'>Граммы</label>" +
+                "<input class='form-input' id='edit-grams-input' type='number' min='1' value='" + entry.grams + "'>" +
+            "</div>" +
+            "<div class='edit-modal-preview' id='edit-preview'>" +
+                "Калории: " + entry.calories + " ккал<br>" +
+                "Белки: " + entry.protein + " г &nbsp;·&nbsp; Жиры: " + entry.fat + " г &nbsp;·&nbsp; Углеводы: " + entry.carbohydrates + " г" +
+            "</div>" +
+            "<div class='edit-modal-actions'>" +
+                "<button class='btn-cancel' id='edit-cancel-btn'>Отмена</button>" +
+                "<button class='btn-green'  id='edit-save-btn'>Сохранить</button>" +
+            "</div>" +
+        "</div>";
+
+    document.body.appendChild(overlay);
+
+    let gramsInput = document.getElementById("edit-grams-input");
+    let preview    = document.getElementById("edit-preview");
+
+    let per100 = {
+        calories:      Math.round((entry.calories      / entry.grams) * 100 * 10) / 10,
+        protein:       Math.round((entry.protein       / entry.grams) * 100 * 10) / 10,
+        fat:           Math.round((entry.fat           / entry.grams) * 100 * 10) / 10,
+        carbohydrates: Math.round((entry.carbohydrates / entry.grams) * 100 * 10) / 10
+    };
+
+    gramsInput.addEventListener("input", function() {
+        let g = Number(gramsInput.value);
+        if (g <= 0) return;
+        let c = Math.round(per100.calories      / 100 * g);
+        let p = Math.round(per100.protein       / 100 * g * 10) / 10;
+        let f = Math.round(per100.fat           / 100 * g * 10) / 10;
+        let u = Math.round(per100.carbohydrates / 100 * g * 10) / 10;
+        preview.innerHTML = "Калории: " + c + " ккал<br>Белки: " + p + " г &nbsp;·&nbsp; Жиры: " + f + " г &nbsp;·&nbsp; Углеводы: " + u + " г";
+    });
+
+    document.getElementById("edit-save-btn").addEventListener("click", function() {
+        let g = Number(gramsInput.value);
+        if (g <= 0) { gramsInput.focus(); return; }
+
+        diary[mealKey][index] = {
+            name:          entry.name,
+            grams:         g,
+            calories:      Math.round(per100.calories      / 100 * g),
+            protein:       Math.round(per100.protein       / 100 * g * 10) / 10,
+            fat:           Math.round(per100.fat           / 100 * g * 10) / 10,
+            carbohydrates: Math.round(per100.carbohydrates / 100 * g * 10) / 10
+        };
+
+        renderDiary();
+        updateTotals();
+        saveDiary();
+        overlay.remove();
+    });
+
+    document.getElementById("edit-cancel-btn").addEventListener("click", function() { overlay.remove(); });
+    overlay.addEventListener("click", function(e) { if (e.target === overlay) overlay.remove(); });
+
+    gramsInput.focus();
+    gramsInput.select();
+}
+
+let selectedFoodName        = "";
+let selectedNutritionPer100 = null;
+let foundFoods              = [];
+let russianQuery            = "";
+
+let openModalBtn  = document.getElementById("open-modal-btn");
+let modalOverlay  = document.getElementById("modal-overlay");
 let modalCloseBtn = document.getElementById("modal-close-btn");
 
 openModalBtn.addEventListener("click", function(e) {
@@ -253,11 +347,21 @@ function renderMeal(mealKey, listId, kcalId) {
                 + "<div class='food-name'>" + entry.name + " (" + entry.grams + " г)</div>"
                 + "<div class='food-kcal-small'>" + entry.calories + " ккал · Б: " + entry.protein + "г · Ж: " + entry.fat + "г · У: " + entry.carbohydrates + "г</div>"
             + "</div>"
-            + "<button class='food-delete' data-meal='" + mealKey + "' data-index='" + i + "'>✕</button>";
+            + "<div class='food-actions'>"
+                + "<button class='food-edit'  title='Изменить вес' data-meal='" + mealKey + "' data-index='" + i + "'>✏️</button>"
+                + "<button class='food-delete' title='Удалить'      data-meal='" + mealKey + "' data-index='" + i + "'>✕</button>"
+            + "</div>";
         list.appendChild(row);
     });
 
     kcalEl.textContent = mealTotal + " ккал";
+
+    list.querySelectorAll(".food-edit").forEach(function(btn) {
+        btn.addEventListener("click", function(e) {
+            e.stopPropagation();
+            openEditModal(this.dataset.meal, Number(this.dataset.index));
+        });
+    });
 
     list.querySelectorAll(".food-delete").forEach(function(btn) {
         btn.addEventListener("click", function() {
@@ -293,12 +397,11 @@ function updateTotals() {
     setText("progress-label", percent + "% от нормы");
 
     let remEl = document.getElementById("cal-remaining-block");
-    if (cal === 0)      { remEl.style.color = "#888";     remEl.textContent = "Осталось: " + dailyNorm + " ккал"; }
-    else if (remaining > 0) { remEl.style.color = "#2E7D52"; remEl.textContent = "Осталось: " + remaining + " ккал"; }
+    if (cal === 0)            { remEl.style.color = "#888";     remEl.textContent = "Осталось: " + dailyNorm + " ккал"; }
+    else if (remaining > 0)   { remEl.style.color = "#2E7D52"; remEl.textContent = "Осталось: " + remaining + " ккал"; }
     else if (remaining === 0) { remEl.style.color = "#2E7D52"; remEl.textContent = "✓ Норма выполнена!"; }
-    else                { remEl.style.color = "#E53935"; remEl.textContent = "Превышение: +" + Math.abs(remaining) + " ккал"; }
+    else                      { remEl.style.color = "#E53935"; remEl.textContent = "Превышение: +" + Math.abs(remaining) + " ккал"; }
 }
-
 
 loadDiary().then(function() {
     loadNormSettings();
