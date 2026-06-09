@@ -89,8 +89,8 @@
 
             <div class="hero">
                 <div class="hero-title">Привет! 👋</div>
-                <div class="hero-sub">
-                    Сегодня вы съели 1 450 ккал из 2 100. До нормы осталось 650 ккал. Продолжайте — вы на верном пути!
+                <div class="hero-sub" id="hero-sub">
+                    Рассчитайте вашу норму калорий и начните вести дневник питания.
                 </div>
                 <a href="dashboard.html" class="hero-btn">Открыть дневник →</a>
             </div>
@@ -101,37 +101,37 @@
 
                     <div class="snap-card green">
                         <div class="snap-card-title">Калории</div>
-                        <div class="snap-card-val" id="snap-calories">1 450</div>
-                        <div class="snap-card-sub" id="snap-calories-sub">из 2 100 ккал</div>
+                        <div class="snap-card-val" id="snap-calories">-</div>
+                        <div class="snap-card-sub" id="snap-calories-sub">из - ккал</div>
                         <div class="snap-progress">
-                            <div class="snap-progress-bar" style="width: 69%;"></div>
+                            <div class="snap-progress-bar" id="snap-bar-calories" style="width: 0%;"></div>
                         </div>
                     </div>
 
                     <div class="snap-card">
                         <div class="snap-card-title">Белки</div>
-                        <div class="snap-card-val">68 г</div>
-                        <div class="snap-card-sub">из 158 г</div>
+                        <div class="snap-card-val" id="snap-protein">-</div>
+                        <div class="snap-card-sub" id="snap-protein-sub">из - г</div>
                         <div class="snap-progress">
-                            <div class="snap-progress-bar" style="width: 43%; background: #4CAF7D;"></div>
+                            <div class="snap-progress-bar" id="snap-bar-protein" style="width: 0%; background: #4CAF7D;"></div>
                         </div>
                     </div>
 
                     <div class="snap-card">
                         <div class="snap-card-title">Жиры</div>
-                        <div class="snap-card-val">52 г</div>
-                        <div class="snap-card-sub">из 70 г</div>
+                        <div class="snap-card-val" id="snap-fat">-</div>
+                        <div class="snap-card-sub" id="snap-fat-sub">из - г</div>
                         <div class="snap-progress">
-                            <div class="snap-progress-bar" style="width: 74%; background: #FFA726;"></div>
+                            <div class="snap-progress-bar" id="snap-bar-fat" style="width: 0%; background: #FFA726;"></div>
                         </div>
                     </div>
 
                     <div class="snap-card">
                         <div class="snap-card-title">Углеводы</div>
-                        <div class="snap-card-val">187 г</div>
-                        <div class="snap-card-sub">из 263 г</div>
+                        <div class="snap-card-val" id="snap-carbs">-</div>
+                        <div class="snap-card-sub" id="snap-carbs-sub">из - г</div>
                         <div class="snap-progress">
-                            <div class="snap-progress-bar" style="width: 71%; background: #42A5F5;"></div>
+                            <div class="snap-progress-bar" id="snap-bar-carbs" style="width: 0%; background: #42A5F5;"></div>
                         </div>
                     </div>
 
@@ -162,6 +162,7 @@
         </div>
     </nav>
 
+    <script src="https://unpkg.com/dexie/dist/dexie.js"></script>
     <script src="js/script.js"></script>
 </body>
 
