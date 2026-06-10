@@ -1676,3 +1676,82 @@ html.dark .day-row-macro span {
 html.dark .switch-slider {
     background: #444;
 }
+
+html.dark .modal {
+    background: #1A1A1A;
+    color: #E0E0E0;
+}
+
+html.dark .modal-title {
+    color: #E0E0E0;
+}
+
+html.dark .modal-close {
+    color: #666;
+}
+
+html.dark .modal-close:hover {
+    color: #E0E0E0;
+}
+
+html.dark .modal-error {
+    background: #2d1515;
+    color: #ff6b6b;
+}
+
+html.dark .modal-status {
+    color: #666;
+}
+
+html.dark .modal-product-name {
+    background: #1a2e22;
+    color: var(--green-accent);
+}
+
+html.dark .modal-preview {
+    background: #252525;
+}
+
+html.dark .preview-row {
+    color: #aaa;
+}
+
+html.dark .preview-row span {
+    color: #E0E0E0;
+}
+
+html.dark .modal-back-btn {
+    background: transparent;
+    border-color: #333;
+    color: #aaa;
+}
+
+html.dark .modal-back-btn:hover {
+    background: #252525;
+}
+
+html.dark .result-item {
+    background: #252525;
+    border-color: #333;
+    color: #E0E0E0;
+}
+
+html.dark .result-item:hover {
+    background: #1a2e22;
+    border-color: var(--green-accent);
+}
+
+html.dark .result-name {
+    color: #E0E0E0;
+}
+
+html.dark .result-info {
+    color: #666;
+}
+
+html.dark .meal-select,
+html.dark #meal-select {
+    background: #252525;
+    border-color: #333;
+    color: #E0E0E0;
+}
