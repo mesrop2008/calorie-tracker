@@ -411,39 +411,14 @@ function updateTotals() {
 
     let isOver;
     let targetText;
-if (dailyGoal === "lose") {
 
-    let target = dailyNorm - 550;
-    let diff   = cal - (dailyNorm - 500);
-    isOver     = cal > dailyNorm - 500;
-
-    if (cal === 0) {
-        targetText = ["Цель: съесть около " + target + " ккал", "#888"];
-    } else if (normReached) {
-        targetText = ["✓ Дефицит в норме!", "#2E7D52"];
-    } else if (cal < dailyNorm - 600) {
-        targetText = ["Недоедано: " + (dailyNorm - 600 - cal) + " ккал до дефицита", "#2E7D52"];
+    if (dailyGoal === "lose") {
+        isOver = cal > dailyNorm - 500;
+    } else if (dailyGoal === "gain") {
+        isOver = cal > dailyNorm + 1000;
     } else {
-        targetText = ["Превышение: +" + diff + " ккал — дефицит слишком малый", "#E53935"];
+        isOver = cal > dailyNorm + 200;
     }
-
-} else if (dailyGoal === "gain") {
-
-    isOver = cal > dailyNorm + 1000;
-
-    if (cal === 0) {
-        targetText = ["Цель: съесть не менее " + dailyNorm + " ккал", "#888"];
-    } else if (normReached) {
-        targetText = ["✓ Норма выполнена!", "#2E7D52"];
-    } else if (isOver) {
-        targetText = ["Превышение: +" + (cal - dailyNorm - 1000) + " ккал — слишком много", "#E53935"];
-    } else {
-        targetText = ["Осталось: " + (dailyNorm - cal) + " ккал до нормы", "#2E7D52"];
-    }
-
-} else {
-
-    isOver = cal > dailyNorm + 200;
 
     if (cal === 0) {
         targetText = ["Осталось: " + dailyNorm + " ккал", "#888"];
@@ -451,13 +426,9 @@ if (dailyGoal === "lose") {
         targetText = ["✓ Норма выполнена!", "#2E7D52"];
     } else if (isOver) {
         targetText = ["Превышение: +" + (cal - dailyNorm) + " ккал", "#E53935"];
-    } else if (cal < dailyNorm - 200) {
-        targetText = ["Осталось: " + (dailyNorm - cal) + " ккал", "#2E7D52"];
     } else {
-        targetText = ["Превышение: +" + (cal - dailyNorm) + " ккал (в погрешности)", "#FFA726"];
+        targetText = ["Осталось: " + (dailyNorm - cal) + " ккал", "#2E7D52"];
     }
-
-}
 
     setText("total-calories", cal);
     setText("total-protein", Math.round(prot * 10) / 10 + " г");
@@ -599,7 +570,6 @@ function renderStreakAndSummary(records, streakRecords, today) {
     let streak = 0;
     let cursor = today;
 
-    // Если сегодня норма ещё не выполнена — начинаем считать со вчерашнего дня
     let todayRec = byDate[today];
     if (!todayRec || !todayRec.normReached) {
         cursor = addDays(today, -1);
