@@ -1383,3 +1383,103 @@ body {
 .switch input:checked + .switch-slider:before {
     transform: translateX(18px);
 }
+
+.settings-menu-item:hover {
+    background: #F0F0F0;
+    color: #1A1A1A;
+}
+
+.settings-section {
+    display: none;
+}
+
+.settings-section.visible {
+    display: block;
+}
+
+.save-toast {
+    position: fixed;
+    bottom: 90px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #2E7D52;
+    color: #fff;
+    padding: 10px 24px;
+    border-radius: 24px;
+    font-size: 14px;
+    font-weight: 500;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+    z-index: 999;
+    white-space: nowrap;
+}
+
+.save-toast.show {
+    opacity: 1;
+}
+
+.danger-zone {
+    margin-top: 16px;
+}
+
+.confirm-dialog {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 600;
+}
+
+.confirm-box {
+    background: #fff;
+    border-radius: 12px;
+    padding: 24px;
+    width: 300px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+}
+
+.confirm-title {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.confirm-sub {
+    font-size: 13px;
+    color: #888;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.confirm-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.confirm-actions .btn-cancel {
+    flex: 1;
+}
+
+.confirm-actions .btn-danger {
+    flex: 1;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+.field-error {
+    font-size: 11px;
+    color: #E53935;
+    margin-top: 4px;
+    display: none;
+}
+
+.form-input.invalid {
+    border-color: #E53935;
+}
+
+.form-input.invalid:focus {
+    border-color: #E53935;
+}
