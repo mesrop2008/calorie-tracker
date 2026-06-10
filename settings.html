@@ -11,9 +11,7 @@
 <body>
 
     <header class="topnav">
-        <a href="home.html" class="nav-logo">
-            <span>🥗</span> CalorieTracker
-        </a>
+        <a href="index.html" class="nav-logo"><span>🥗</span> CalorieTracker</a>
         <nav class="nav-links">
             <a href="index.html" class="nav-link">Главная</a>
             <a href="dashboard.html" class="nav-link">Дневник</a>
@@ -28,106 +26,89 @@
             <div class="sidebar-section">
                 <div class="sidebar-title">Меню настроек</div>
                 <div class="settings-menu">
-                    <a href="#params" class="settings-menu-item active"><span>👤</span> Параметры тела</a>
-                    <a href="#goals" class="settings-menu-item"><span>🎯</span> Цели</a>
-                    <a href="#notifications" class="settings-menu-item"><span>🔔</span> Уведомления</a>
-                    <a href="#data" class="settings-menu-item"><span>💾</span> Данные</a>
-                    <a href="#display" class="settings-menu-item"><span>🎨</span> Отображение</a>
+                    <a href="#" class="settings-menu-item active" data-section="params"><span>👤</span> Параметры тела</a>
+                    <a href="#" class="settings-menu-item" data-section="goals"><span>🎯</span> Цели</a>
+                    <a href="#" class="settings-menu-item" data-section="display"><span>🎨</span> Отображение</a>
+                    <a href="#" class="settings-menu-item" data-section="data"><span>💾</span> Данные</a>
                 </div>
             </div>
-
-            
         </aside>
 
         <main>
             <div class="main-card">
 
-                <div id="params" class="settings-section">
+                <div id="params" class="settings-section visible">
                     <div class="settings-section-title">👤 Параметры тела</div>
                     <div class="params-grid">
                         <div class="form-group">
                             <label class="form-label">Вес, кг</label>
-                            <input class="form-input" type="number" value="72">
+                            <input class="form-input" type="number" id="s-weight" placeholder="72">
+                            <div class="field-error" id="s-weight-error"></div>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Рост, см</label>
-                            <input class="form-input" type="number" value="175">
+                            <input class="form-input" type="number" id="s-height" placeholder="175">
+                            <div class="field-error" id="s-height-error"></div>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Возраст, лет</label>
-                            <input class="form-input" type="number" value="22">
+                            <input class="form-input" type="number" id="s-age" placeholder="22">
+                            <div class="field-error" id="s-age-error"></div>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Пол</label>
-                            <div class="toggle-group">
-                                <button class="toggle-btn active">Мужской</button>
-                                <button class="toggle-btn">Женский</button>
+                            <div class="toggle-group" id="s-gender-group">
+                                <button class="toggle-btn active" data-gender="male">Мужской</button>
+                                <button class="toggle-btn" data-gender="female">Женский</button>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="form-label">Уровень активности</label>
                         <div class="select-wrap">
-                            <select class="form-select">
-                                <option>Умеренная активность (3–5 тренировок в неделю)</option>
-                                <option>Сидячий образ жизни</option>
-                                <option>Лёгкая активность (1–3 тренировки)</option>
-                                <option>Высокая активность (6–7 тренировок)</option>
-                                <option>Очень высокая (физический труд)</option>
+                            <select class="form-select" id="s-activity">
+                                <option value="sedentary">Сидячий образ жизни</option>
+                                <option value="light">Лёгкая активность (1–3 тренировки)</option>
+                                <option value="moderate">Умеренная активность (3–5 тренировок)</option>
+                                <option value="high">Высокая активность (6–7 тренировок)</option>
                             </select>
                             <span class="select-arrow">▼</span>
                         </div>
                     </div>
-                    <button class="btn-save">Сохранить параметры</button>
+                    <button class="btn-save" id="save-params-btn">Сохранить параметры</button>
                 </div>
 
                 <div id="goals" class="settings-section">
                     <div class="settings-section-title">🎯 Цели и нормы</div>
                     <div class="form-group">
                         <label class="form-label">Цель</label>
-                        <div class="goal-toggle">
-                            <button class="goal-btn">Похудеть</button>
-                            <button class="goal-btn active">Удержать вес</button>
-                            <button class="goal-btn">Набрать массу</button>
+                        <div class="goal-toggle" id="s-goal-group">
+                            <button class="goal-btn" data-goal="lose">Похудеть</button>
+                            <button class="goal-btn active" data-goal="keep">Удержать</button>
+                            <button class="goal-btn" data-goal="gain">Набрать массу</button>
                         </div>
                     </div>
                     <div class="settings-row">
                         <span class="settings-row-label">Рассчитанная норма</span>
-                        <div class="settings-row-right">
-                            <span class="settings-row-val-green">2 100 ккал/день</span>
-                            <span class="settings-row-edit">Пересчитать</span>
-                        </div>
+                        <span class="settings-row-val-green" id="s-norm-display">—</span>
                     </div>
                     <div class="settings-row">
-                        <span class="settings-row-label">Коэффициент активности</span>
-                        <span class="settings-row-val">1.55 (умеренная)</span>
+                        <span class="settings-row-label">Коэфф. активности</span>
+                        <span class="settings-row-val" id="s-factor-display">—</span>
                     </div>
                     <div class="settings-row">
-                        <span class="settings-row-label">БОВ (базовый обмен веществ)</span>
-                        <span class="settings-row-val">1 808 ккал</span>
+                        <span class="settings-row-label">Базовый обмен веществ (БОВ)</span>
+                        <span class="settings-row-val" id="s-bmr-display">—</span>
                     </div>
+                    <button class="btn-save" id="save-goals-btn" style="margin-top:16px">Сохранить цель</button>
                 </div>
 
-                <div id="notifications" class="settings-section">
-                    <div class="settings-section-title">🔔 Уведомления</div>
+                <div id="display" class="settings-section">
+                    <div class="settings-section-title">🎨 Отображение</div>
                     <div class="settings-row">
-                        <span class="settings-row-label">Напоминания о еде</span>
+                        <span class="settings-row-label">Тёмная тема</span>
                         <label class="switch">
-                            <input type="checkbox" checked>
-                            <span class="switch-slider"></span>
-                        </label>
-                    </div>
-                    <div class="settings-row">
-                        <span class="settings-row-label">Итог дня вечером</span>
-                        <label class="switch">
-                            <input type="checkbox" checked>
-                            <span class="switch-slider"></span>
-                        </label>
-                    </div>
-                    <div class="settings-row">
-                        <span class="settings-row-label">Предупреждение о превышении нормы</span>
-                        <label class="switch">
-                            <input type="checkbox">
+                            <input type="checkbox" id="s-dark-mode">
                             <span class="switch-slider"></span>
                         </label>
                     </div>
@@ -136,49 +117,15 @@
                 <div id="data" class="settings-section">
                     <div class="settings-section-title">💾 Данные</div>
                     <div class="settings-row">
-                        <span class="settings-row-label">Хранилище данных</span>
+                        <span class="settings-row-label">Хранилище</span>
                         <span class="settings-row-val">IndexedDB (браузер)</span>
                     </div>
                     <div class="settings-row">
-                        <span class="settings-row-label">Записей в базе</span>
-                        <span class="settings-row-val">142 продукта · 30 дней</span>
+                        <span class="settings-row-label">Дней в базе</span>
+                        <span class="settings-row-val" id="s-db-days">—</span>
                     </div>
-                    <div class="data-buttons">
-                        <button class="btn-green-outline">📥 Экспорт данных</button>
-                        <button class="btn-green-outline">📤 Импорт данных</button>
-                        <button class="btn-danger">🗑 Очистить историю</button>
-                    </div>
-                </div>
-
-                <div id="display" class="settings-section">
-                    <div class="settings-section-title">🎨 Отображение</div>
-                    <div class="settings-row">
-                        <span class="settings-row-label">Показывать БЖУ в дневнике</span>
-                        <label class="switch">
-                            <input type="checkbox" checked>
-                            <span class="switch-slider"></span>
-                        </label>
-                    </div>
-                    <div class="settings-row">
-                        <span class="settings-row-label">Разбивать по приёмам пищи</span>
-                        <label class="switch">
-                            <input type="checkbox" checked>
-                            <span class="switch-slider"></span>
-                        </label>
-                    </div>
-                    <div class="settings-row">
-                        <span class="settings-row-label">Тёмная тема</span>
-                        <label class="switch">
-                            <input type="checkbox">
-                            <span class="switch-slider"></span>
-                        </label>
-                    </div>
-                    <div class="form-group" style="margin-top: 12px;">
-                        <label class="form-label">Единицы измерения</label>
-                        <div class="toggle-group" style="max-width: 200px;">
-                            <button class="toggle-btn active">кг / см</button>
-                            <button class="toggle-btn">lb / in</button>
-                        </div>
+                    <div class="danger-zone">
+                        <button class="btn-danger" id="clear-history-btn">🗑 Очистить историю</button>
                     </div>
                 </div>
 
@@ -186,27 +133,30 @@
         </main>
     </div>
 
+    <div class="save-toast" id="save-toast">✓ Сохранено</div>
+
+    <div class="confirm-dialog" id="confirm-dialog" style="display:none">
+        <div class="confirm-box">
+            <div class="confirm-title">Очистить историю?</div>
+            <div class="confirm-sub">Все записи дневника будут удалены. Действие нельзя отменить.</div>
+            <div class="confirm-actions">
+                <button class="btn-cancel" id="confirm-cancel">Отмена</button>
+                <button class="btn-danger" id="confirm-clear">Очистить</button>
+            </div>
+        </div>
+    </div>
+
     <nav class="mobile-nav">
         <div class="mobile-nav-inner">
-            <a href="index.html" class="mob-btn">
-                <span class="mob-btn-icon">🏠</span>
-                Главная
-            </a>
-            <a href="dashboard.html" class="mob-btn">
-                <span class="mob-btn-icon">📒</span>
-                Дневник
-            </a>
-            <a href="history.html" class="mob-btn">
-                <span class="mob-btn-icon">📅</span>
-                История
-            </a>
-            <a href="settings.html" class="mob-btn active">
-                <span class="mob-btn-icon">⚙️</span>
-                Настройки
-            </a>
+            <a href="index.html" class="mob-btn"><span class="mob-btn-icon">🏠</span>Главная</a>
+            <a href="dashboard.html" class="mob-btn"><span class="mob-btn-icon">📒</span>Дневник</a>
+            <a href="history.html" class="mob-btn"><span class="mob-btn-icon">📅</span>История</a>
+            <a href="settings.html" class="mob-btn active"><span class="mob-btn-icon">⚙️</span>Настройки</a>
         </div>
     </nav>
 
-</body>
+    <script src="https://unpkg.com/dexie/dist/dexie.js"></script>
+    <script src="js/settings.js"></script>
 
+</body>
 </html>
