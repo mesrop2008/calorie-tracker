@@ -610,7 +610,7 @@ function renderTopFoods(records) {
                 snack:     [entry("Торт шоколадный", 400, 1560, 20, 80, 196), entry("Мороженое", 200, 420, 6, 22, 52), entry("Чипсы", 150, 810, 7, 48, 90), entry("Сок", 300, 180, 2, 0, 44)] },
             { date: offset(-4), cal: 0, reached: false,
                 breakfast: [], lunch: [], dinner: [], snack: [] },
-            { date: offset(-3), cal: 1540, reached: false,
+            { date: offset(-3), cal: 3200, reached: false,
                 breakfast: [entry("Каша гречневая", 200, 220, 8, 2, 44), entry("Творог 9%", 150, 202, 17, 9, 5)],
                 lunch:     [entry("Суп куриный", 400, 180, 14, 6, 18), entry("Курица", 150, 178, 32, 4, 0)],
                 dinner:    [entry("Лосось с овощами", 300, 360, 28, 12, 38)],
