@@ -666,7 +666,7 @@ body {
 .edit-modal-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.45);
+    background: rgba(0, 0, 0, 0.45);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -678,7 +678,7 @@ body {
     border-radius: 12px;
     padding: 24px;
     width: 300px;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
 }
 
 .edit-modal-title {
@@ -937,25 +937,48 @@ body {
     border-radius: 8px;
     padding: 3px;
     width: 100%;
+    box-sizing: border-box;
 }
 
 .period-tab {
     flex: 1;
-    padding: 6px 16px;
+    min-width: 0;
+    padding: 6px 4px;
     border-radius: 6px;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 500;
     color: #888;
     cursor: pointer;
     border: none;
     background: transparent;
     font-family: inherit;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
 }
 
 .period-tab.active {
     background: #fff;
     color: #1A1A1A;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.theme-toggle-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    padding: 4px 8px;
+    border-radius: 8px;
+    margin-left: auto;
+    line-height: 1;
+    transition: background 0.15s;
+    flex-shrink: 0;
+}
+
+.theme-toggle-btn:hover {
+    background: rgba(255, 255, 255, 0.12);
 }
 
 .summary-item {
@@ -1375,11 +1398,11 @@ body {
     transition: transform 0.2s;
 }
 
-.switch input:checked + .switch-slider {
+.switch input:checked+.switch-slider {
     background: #2E7D52;
 }
 
-.switch input:checked + .switch-slider:before {
+.switch input:checked+.switch-slider:before {
     transform: translateX(18px);
 }
 
@@ -1481,4 +1504,175 @@ body {
 
 .form-input.invalid:focus {
     border-color: #E53935;
+}
+
+html.dark {
+    background: #0F0F0F;
+    color: #E0E0E0;
+}
+
+html.dark body {
+    background: #0F0F0F;
+    color: #E0E0E0;
+}
+
+html.dark .sidebar,
+html.dark .main-card,
+html.dark .side-card,
+html.dark .snap-card,
+html.dark .edit-modal,
+html.dark .confirm-box {
+    background: #1A1A1A;
+    border-color: #2A2A2A;
+}
+
+html.dark .main-card-header,
+html.dark .cal-summary,
+html.dark .meal-header,
+html.dark .food-row,
+html.dark .settings-row,
+html.dark .settings-section,
+html.dark .top-row,
+html.dark .day-row {
+    border-color: #2A2A2A;
+}
+
+html.dark .meal-header {
+    background: #222222;
+}
+
+html.dark .food-row:hover,
+html.dark .day-row:hover {
+    background: #222222;
+}
+
+html.dark .mobile-nav {
+    background: #1A1A1A;
+    border-color: #2A2A2A;
+}
+
+html.dark .mob-btn {
+    color: #666;
+}
+
+html.dark .mob-btn.active {
+    color: var(--green-accent);
+}
+
+html.dark .form-input,
+html.dark .form-select {
+    background: #252525;
+    border-color: #333;
+    color: #E0E0E0;
+}
+
+html.dark .toggle-btn {
+    background: #252525;
+    color: #aaa;
+}
+
+html.dark .toggle-btn.active {
+    background: #2E7D52;
+    color: #fff;
+}
+
+html.dark .goal-btn {
+    background: #252525;
+    border-color: #333;
+    color: #aaa;
+}
+
+html.dark .goal-btn.active {
+    background: #2E7D52;
+    color: #fff;
+}
+
+html.dark .goal-btn:last-child {
+    border-right: none;
+}
+
+html.dark .norm-box {
+    background: #1a2e22;
+    border-color: var(--green-accent);
+}
+
+html.dark .norm-box-title {
+    color: var(--green-accent);
+}
+
+html.dark .day-nav-today {
+    background: #252525;
+    border-color: #333;
+    color: #aaa;
+}
+
+html.dark .progress-wrap,
+html.dark .snap-progress {
+    background: #2A2A2A;
+}
+
+html.dark .period-tabs {
+    background: #252525;
+}
+
+html.dark .period-tab.active {
+    background: #333;
+    color: #E0E0E0;
+}
+
+html.dark .settings-menu-item {
+    color: #aaa;
+}
+
+html.dark .settings-menu-item:hover {
+    background: #252525;
+    color: #E0E0E0;
+}
+
+html.dark .settings-menu-item.active {
+    background: #1a2e22;
+    color: #E0E0E0;
+}
+
+html.dark .btn-cancel {
+    background: #2A2A2A;
+    color: #aaa;
+}
+
+html.dark .btn-cancel:hover {
+    background: #333;
+}
+
+html.dark .edit-modal-preview {
+    background: #252525;
+    color: #aaa;
+}
+
+html.dark .tag-green {
+    background: #1a2e22;
+}
+
+html.dark .tag-red {
+    background: #2d1515;
+}
+
+html.dark .tag-yellow {
+    background: #2d2510;
+}
+
+html.dark .top-rank {
+    background: #1a2e22;
+    color: var(--green-accent);
+}
+
+html.dark .vdivider {
+    background: #2A2A2A;
+}
+
+html.dark .day-row-macro span {
+    color: #E0E0E0;
+}
+
+html.dark .switch-slider {
+    background: #444;
 }
