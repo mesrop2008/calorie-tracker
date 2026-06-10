@@ -598,7 +598,7 @@ function renderTopFoods(records) {
         }
 
         let days = [
-            { date: offset(-6), cal: 1820, reached: true,
+            { date: offset(-6), cal: 3200, reached: true,
                 breakfast: [entry("Овсянка", 200, 340, 12, 6, 58), entry("Яйцо", 100, 147, 13, 10, 1)],
                 lunch:     [entry("Курица", 200, 237, 43, 5, 0), entry("Рис варёный", 150, 195, 4, 0, 44)],
                 dinner:    [entry("Лосось с гречкой", 300, 420, 34, 14, 38)],
@@ -615,12 +615,12 @@ function renderTopFoods(records) {
                 lunch:     [entry("Суп куриный", 400, 180, 14, 6, 18), entry("Курица", 150, 178, 32, 4, 0)],
                 dinner:    [entry("Лосось с овощами", 300, 360, 28, 12, 38)],
                 snack:     [entry("Яблоко", 150, 78, 0, 0, 20), entry("Кефир 1%", 200, 68, 6, 1, 9)] },
-            { date: offset(-2), cal: 2080, reached: true,
+            { date: offset(-2), cal: 3345, reached: true,
                 breakfast: [entry("Овсянка", 200, 340, 12, 6, 58), entry("Яйцо", 100, 147, 13, 10, 1)],
                 lunch:     [entry("Курица", 200, 237, 43, 5, 0), entry("Гречка", 150, 162, 6, 2, 32)],
                 dinner:    [entry("Лосось запечённый", 200, 280, 40, 12, 0), entry("Овощи тушёные", 200, 120, 4, 4, 16)],
                 snack:     [entry("Творог 5%", 150, 135, 18, 4, 3), entry("Миндаль", 30, 174, 4, 16, 6), entry("Кефир 1%", 250, 85, 9, 1, 12)] },
-            { date: offset(-1), cal: 2050, reached: true,
+            { date: offset(-1), cal: 3538, reached: true,
                 breakfast: [entry("Овсянка", 200, 340, 12, 6, 58), entry("Банан", 120, 107, 1, 0, 27)],
                 lunch:     [entry("Курица", 200, 237, 43, 5, 0), entry("Гречка", 150, 162, 6, 2, 32)],
                 dinner:    [entry("Рыба запечённая", 200, 280, 40, 12, 0), entry("Овощи тушёные", 200, 120, 4, 4, 16)],
