@@ -663,7 +663,6 @@ body {
     flex-shrink: 0;
 }
 
-/* Модал редактирования веса */
 .edit-modal-overlay {
     position: fixed;
     inset: 0;

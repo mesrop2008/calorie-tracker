@@ -406,4 +406,253 @@ function updateTotals() {
 loadDiary().then(function() {
     loadNormSettings();
     setText("diary-date", formatDateRu(getTodayDate()));
+    loadStats();
 });
+
+function addDays(dateStr, n) {
+    let parts = dateStr.split("-");
+    let d = new Date(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2]));
+    d.setDate(d.getDate() + n);
+    return d.getFullYear() + "-"
+        + String(d.getMonth() + 1).padStart(2, "0") + "-"
+        + String(d.getDate()).padStart(2, "0");
+}
+
+function loadStats() {
+    let today = getTodayDate();
+    let from  = addDays(today, -6);
+
+    db.diary.where("date").between(from, today, true, true).toArray()
+        .then(function(records) {
+            renderWeekChart(records, from, today);
+            renderStreakAndSummary(records, today);
+            renderTopFoods(records);
+        })
+        .catch(function() {});
+}
+
+function renderWeekChart(records, from, today) {
+    let chartEl = document.getElementById("week-chart");
+    let daysEl  = document.getElementById("week-days");
+    if (!chartEl || !daysEl) return;
+
+    let byDate = {};
+    records.forEach(function(r) { byDate[r.date] = r.totalCalories || 0; });
+
+    let days = [];
+    for (let i = 0; i < 7; i++) {
+        days.push(addDays(from, i));
+    }
+
+    let maxCal = 0;
+    days.forEach(function(d) { if ((byDate[d] || 0) > maxCal) maxCal = byDate[d] || 0; });
+    if (dailyNorm > maxCal) maxCal = dailyNorm;
+    if (maxCal === 0) maxCal = 2000;
+
+    let WEEKDAYS = ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"];
+    let CHART_H = 100;
+
+    chartEl.innerHTML = "";
+    daysEl.innerHTML  = "";
+
+    days.forEach(function(dateStr) {
+        let cal     = byDate[dateStr] || 0;
+        let isToday = dateStr === today;
+        let height  = cal > 0 ? Math.max(4, Math.round((cal / maxCal) * CHART_H)) : 0;
+        let overNorm = dailyNorm > 0 && cal > dailyNorm;
+
+        let col = document.createElement("div");
+        col.className = "week-col";
+
+        let valEl = document.createElement("span");
+        valEl.className = "week-val";
+        valEl.textContent = cal > 0 ? cal : "";
+
+        let barEl = document.createElement("div");
+        barEl.className = "week-bar" + (isToday ? " today" : "");
+        barEl.style.height = height + "px";
+        if (overNorm) barEl.style.background = "#E53935";
+
+        col.appendChild(valEl);
+        col.appendChild(barEl);
+        chartEl.appendChild(col);
+
+        let parts = dateStr.split("-");
+        let d = new Date(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2]));
+        let dayLabel = document.createElement("span");
+        dayLabel.textContent = WEEKDAYS[d.getDay()];
+        if (isToday) dayLabel.style.fontWeight = "700";
+        daysEl.appendChild(dayLabel);
+    });
+}
+
+function renderStreakAndSummary(records, today) {
+    let byDate = {};
+    records.forEach(function(r) { byDate[r.date] = r; });
+
+    let totalCal = 0, normDays = 0, activeDays = 0;
+    records.forEach(function(r) {
+        if ((r.totalCalories || 0) > 0) {
+            totalCal += r.totalCalories;
+            activeDays++;
+        }
+        if (r.normReached) normDays++;
+    });
+
+    let avgCal = activeDays > 0 ? Math.round(totalCal / activeDays) : 0;
+
+    setText("stat-avg-cal",   avgCal > 0 ? avgCal + " ккал/день" : "—");
+    setText("stat-norm-days", activeDays > 0 ? normDays + " из " + activeDays + " дней ✓" : "—");
+
+    let deficit = activeDays > 0 && dailyNorm > 0
+        ? Math.round(totalCal - dailyNorm * activeDays)
+        : 0;
+    let defEl = document.getElementById("stat-deficit");
+    if (defEl && activeDays > 0) {
+        if (deficit < 0) {
+            defEl.textContent = "Дефицит недели: " + deficit + " ккал";
+        } else if (deficit > 0) {
+            defEl.textContent = "Превышение: +" + deficit + " ккал";
+            defEl.style.color = "#FFA726";
+        }
+    }
+
+    let streak = 0;
+    let cursor = today;
+    while (true) {
+        let rec = byDate[cursor];
+        if (rec && (rec.totalCalories || 0) > 0) {
+            streak++;
+            cursor = addDays(cursor, -1);
+        } else {
+            break;
+        }
+    }
+
+    let streakEl    = document.getElementById("stat-streak");
+    let streakSubEl = document.getElementById("stat-streak-sub");
+    if (streakEl) {
+        let label = streak === 1 ? "день" : streak >= 2 && streak <= 4 ? "дня" : "дней";
+        streakEl.textContent = streak + " " + label + " подряд";
+    }
+    if (streakSubEl) {
+        if (streak === 0)       streakSubEl.textContent = "Начните вести дневник!";
+        else if (streak < 3)    streakSubEl.textContent = "Хорошее начало!";
+        else if (streak < 7)    streakSubEl.textContent = "Продолжайте в том же духе!";
+        else if (streak < 14)   streakSubEl.textContent = "Отличный результат!";
+        else                    streakSubEl.textContent = "Невероятный результат! 💪";
+    }
+}
+
+function renderTopFoods(records) {
+    let counts = {};
+    records.forEach(function(r) {
+        ["breakfast", "lunch", "dinner", "snack"].forEach(function(meal) {
+            (r[meal] || []).forEach(function(e) {
+                let name = e.name || "";
+                if (!name) return;
+                counts[name] = (counts[name] || 0) + 1;
+            });
+        });
+    });
+
+    let sorted = Object.keys(counts).sort(function(a, b) { return counts[b] - counts[a]; }).slice(0, 5);
+
+    let list = document.getElementById("top-foods-list");
+    if (!list) return;
+
+    if (sorted.length === 0) {
+        list.innerHTML = "<div style='font-size:12px; color:#aaa; padding:8px 0'>Добавьте продукты в дневник</div>";
+        return;
+    }
+
+    let EMOJIS = ["🏆", "🥈", "🥉", "🏅", "📍"];
+    list.innerHTML = sorted.map(function(name, i) {
+        return "<div class='top-row'>"
+            + "<span class='top-emoji'>" + EMOJIS[i] + "</span>"
+            + "<span class='top-name'>" + name + "</span>"
+            + "<span class='top-count'>" + counts[name] + " раз</span>"
+            + "<span class='top-rank'>#" + (i + 1) + "</span>"
+            + "</div>";
+    }).join("");
+}
+
+(function seedTestData() {
+    let btn = document.createElement("button");
+    btn.textContent = "🧪 Тестовые данные";
+    btn.style.cssText = "position:fixed;bottom:80px;right:16px;z-index:9999;"
+        + "background:#1B3A2D;color:#fff;border:none;border-radius:8px;"
+        + "padding:8px 14px;font-size:12px;cursor:pointer;opacity:0.85;";
+
+    btn.addEventListener("click", function() {
+        function offset(n) {
+            let dt = new Date();
+            dt.setDate(dt.getDate() + n);
+            return dt.getFullYear() + "-"
+                + String(dt.getMonth() + 1).padStart(2, "0") + "-"
+                + String(dt.getDate()).padStart(2, "0");
+        }
+
+        function entry(name, grams, cal, prot, fat, carbs) {
+            return { name: name, grams: grams, calories: cal, protein: prot, fat: fat, carbohydrates: carbs };
+        }
+
+        let days = [
+            { date: offset(-6), cal: 1820, reached: true,
+                breakfast: [entry("Овсянка", 200, 340, 12, 6, 58), entry("Яйцо", 100, 147, 13, 10, 1)],
+                lunch:     [entry("Курица", 200, 237, 43, 5, 0), entry("Рис варёный", 150, 195, 4, 0, 44)],
+                dinner:    [entry("Лосось с гречкой", 300, 420, 34, 14, 38)],
+                snack:     [entry("Творог 5%", 150, 135, 18, 4, 3), entry("Нуты грецкие", 30, 186, 4, 18, 3)] },
+            { date: offset(-5), cal: 10200, reached: false,
+                breakfast: [entry("Панкейки с мёдом", 300, 840, 18, 30, 108), entry("Бекон", 200, 720, 38, 60, 0)],
+                lunch:     [entry("Пицца пепперони", 600, 1620, 66, 72, 162), entry("Кола 0.5л", 500, 210, 0, 0, 53)],
+                dinner:    [entry("Шаурма 500г", 500, 1850, 80, 140, 5), entry("Картофель фри", 300, 690, 9, 36, 90)],
+                snack:     [entry("Торт шоколадный", 400, 1560, 20, 80, 196), entry("Мороженое", 200, 420, 6, 22, 52), entry("Чипсы", 150, 810, 7, 48, 90), entry("Сок", 300, 180, 2, 0, 44)] },
+            { date: offset(-4), cal: 0, reached: false,
+                breakfast: [], lunch: [], dinner: [], snack: [] },
+            { date: offset(-3), cal: 1540, reached: false,
+                breakfast: [entry("Каша гречневая", 200, 220, 8, 2, 44), entry("Творог 9%", 150, 202, 17, 9, 5)],
+                lunch:     [entry("Суп куриный", 400, 180, 14, 6, 18), entry("Курица", 150, 178, 32, 4, 0)],
+                dinner:    [entry("Лосось с овощами", 300, 360, 28, 12, 38)],
+                snack:     [entry("Яблоко", 150, 78, 0, 0, 20), entry("Кефир 1%", 200, 68, 6, 1, 9)] },
+            { date: offset(-2), cal: 2080, reached: true,
+                breakfast: [entry("Овсянка", 200, 340, 12, 6, 58), entry("Яйцо", 100, 147, 13, 10, 1)],
+                lunch:     [entry("Курица", 200, 237, 43, 5, 0), entry("Гречка", 150, 162, 6, 2, 32)],
+                dinner:    [entry("Лосось запечённый", 200, 280, 40, 12, 0), entry("Овощи тушёные", 200, 120, 4, 4, 16)],
+                snack:     [entry("Творог 5%", 150, 135, 18, 4, 3), entry("Миндаль", 30, 174, 4, 16, 6), entry("Кефир 1%", 250, 85, 9, 1, 12)] },
+            { date: offset(-1), cal: 2050, reached: true,
+                breakfast: [entry("Овсянка", 200, 340, 12, 6, 58), entry("Банан", 120, 107, 1, 0, 27)],
+                lunch:     [entry("Курица", 200, 237, 43, 5, 0), entry("Гречка", 150, 162, 6, 2, 32)],
+                dinner:    [entry("Рыба запечённая", 200, 280, 40, 12, 0), entry("Овощи тушёные", 200, 120, 4, 4, 16)],
+                snack:     [entry("Творог 5%", 150, 135, 18, 4, 3), entry("Миндаль", 30, 174, 4, 16, 6)] },
+            { date: offset(0),  cal: 950,  reached: false,
+                breakfast: [entry("Овсянка", 200, 340, 12, 6, 58), entry("Яйцо", 100, 147, 13, 10, 1)],
+                lunch:     [entry("Творог 9%", 150, 202, 17, 9, 5), entry("Банан", 120, 107, 1, 0, 27)],
+                dinner:    [], snack: [] }
+        ];
+
+        let puts = days.map(function(day) {
+            return db.diary.put({
+                date:          day.date,
+                breakfast:     day.breakfast,
+                lunch:         day.lunch,
+                dinner:        day.dinner,
+                snack:         day.snack,
+                totalCalories: day.cal,
+                totalProtein:  0,
+                totalFat:      0,
+                totalCarbs:    0,
+                normCalories:  dailyNorm,
+                normReached:   day.reached
+            });
+        });
+
+        Promise.all(puts).then(function() {
+            btn.textContent = "✓ Записано";
+            btn.style.background = "#2E7D52";
+            setTimeout(function() { location.reload(); }, 600);
+        });
+    });
+
+    document.body.appendChild(btn);
+}());
